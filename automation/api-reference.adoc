@@ -1,0 +1,33 @@
+---
+sidebar: sidebar 
+permalink: automation/api-reference.html 
+keywords: ontap tools for vmware vsphere rest api reference, api reference 
+summary: ONTAP tools for VMware vSphere 모든 API 호출에 대한 세부 정보가 포함되어 있습니다.  이 참고 자료는 자동화 애플리케이션을 개발할 때 유용합니다. 
+---
+= ONTAP tools for VMware vSphere 에 대한 API 참조
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP tools for VMware vSphere 모든 API 호출에 대한 세부 정보가 포함되어 있습니다.  이 참고 자료는 자동화 애플리케이션을 개발할 때 유용합니다.
+
+Swagger 사용자 인터페이스를 통해 ONTAP tools for VMware vSphere 온라인으로 액세스할 수 있습니다.  ONTAP tools for VMware vSphere 의 IP 주소 또는 FQDN과 포트가 필요합니다.
+
+.단계
+. 브라우저에 다음 URL을 입력하고 변수에 적절한 IP 주소와 포트 조합을 입력한 다음 *Enter* 키를 누릅니다.
++
+`\https://$FQDN_IP_PORT/`
+
++
+*예*
+
++
+`\https://10.61.25.33:8443/`
+
+. 개별 API 호출의 예로, *vCenters* 범주로 스크롤하여 엔드포인트 옆에 있는 *GET*을 선택합니다. `/virtualization/api/v1/vcenters`
+

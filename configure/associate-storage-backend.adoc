@@ -1,0 +1,22 @@
+---
+permalink: configure/associate-storage-backend.html 
+sidebar: sidebar 
+keywords:  
+summary: 스토리지 백엔드를 vCenter Server에 연결하여 스토리지 백엔드와 온보딩된 vCenter Server 인스턴스 간에 전역적으로 매핑을 생성합니다. 
+---
+= vCenter Server 인스턴스와 스토리지 백엔드 연결
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+스토리지 백엔드를 vCenter Server에 연결하여 스토리지 백엔드와 온보딩된 vCenter Server 인스턴스 간에 전역적으로 매핑을 생성합니다.
+
+.단계
+. 웹 브라우저에서 ONTAP 도구 관리자를 실행합니다. `\https://<ONTAPtoolsIP>:8443/virtualization/ui/`
+. 배포 중에 제공한 ONTAP tools for VMware vSphere 로 로그인합니다.
+. 사이드바에서 vCenter를 선택합니다.
+. 스토리지 백엔드와 연결할 vCenter Server 인스턴스에 대한 세로 줄임표를 선택합니다.
+. 드롭다운에서 스토리지 백엔드를 선택하여 vCenter Server 인스턴스를 필요한 스토리지 백엔드와 연결합니다.
+

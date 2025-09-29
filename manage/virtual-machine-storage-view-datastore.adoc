@@ -1,0 +1,26 @@
+---
+permalink: manage/virtual-machine-storage-view-datastore.html 
+sidebar: sidebar 
+keywords: Remove vVol datastore 
+summary: 저장소 보기에는 가상 머신에서 생성된 vVols 목록이 표시됩니다. 
+---
+= 가상 머신 스토리지 보기
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+저장소 보기에는 가상 머신에서 생성된 vVols 목록이 표시됩니다.
+
+
+NOTE: 이 보기는 VMware vSphere 관리 vVols 데이터 저장소 관련 디스크에 대한 ONTAP tools for VMware vSphere 하나 이상 마운트된 VM에 적용할 수 있습니다.
+
+.단계
+. vSphere Client에서 가상 머신으로 이동합니다.
+. 오른쪽 창에서 *모니터* 탭을 선택합니다.
+. * NetApp ONTAP 도구* > *스토리지*를 선택합니다.  *저장소* 세부정보가 오른쪽 창에 나타납니다.  VM에 있는 vVols 목록을 볼 수 있습니다.
++
+'열 관리' 옵션을 사용하면 다른 열을 숨기거나 표시할 수 있습니다.
+
+

@@ -1,0 +1,31 @@
+---
+permalink: release-notes/whats-new.html 
+sidebar: sidebar 
+keywords: 'what"s new, release notes, 10.4, ONTAP tools for VMware vSphere' 
+summary: ONTAP tools for VMware vSphere 에서 사용할 수 있는 새로운 기능에 대해 알아보세요. 
+---
+= ONTAP tools for VMware vSphere 의 새로운 기능
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP tools for VMware vSphere 에서 사용할 수 있는 새로운 기능에 대해 알아보세요.
+
+[cols="30%,70%"]
+|===
+| 업데이트 | 설명 
+
+
+| link:../configure/create-datastore.html["클러스터당 12개 노드가 있는 ASA r2 시스템 지원"] | ONTAP tools for VMware vSphere 클러스터당 최대 12개의 노드를 갖춘 ASA r2 스토리지 시스템의 워크플로를 지원하여 데이터 관리 효율성과 확장성을 개선합니다.  iSCSI 및 FC 프로토콜을 사용하는 vVols 데이터스토어와 iSCSI, FC, NVMe 프로토콜을 사용하는 VMFS 데이터스토어를 지원하여 유연하고 향상된 스토리지 옵션을 제공합니다. 
+
+
+| link:../manage/add-ntpserver.html["ONTAP 도구 관리자 사용자 인터페이스 개선"] | 이제 ONTAP 도구 관리자 인터페이스에서 환경 전체에 걸쳐 정확한 시간 동기화를 위해 NTP 서버를 활성화하고 원격 측정 설정을 구성하여 시스템 성능을 모니터링하고 분석할 수 있습니다.  이러한 설정은 더 이상 유지 관리 콘솔에서 사용할 수 없습니다. 
+
+
+| 강화된 보안 기능 | 이제 보안 기능이 강화되어 업계 표준을 준수하고 보호 기능이 강화되어, 관리자가 VMware 환경을 보다 효과적으로 관리할 수 있도록 견고하고 사용자 친화적인 환경을 제공합니다. 
+
+
+| link:../protect/enable-storage-replication-adapter.html["향상된 SRA 재해 복구 기능"] | ONTAP tools for VMware vSphere 이제 SnapMirror 예약된 스냅샷 복사 외에도 사용자 정의 이름의 스냅샷을 사용하는 Site Recovery Appliance(SRA)를 사용하여 재해 복구 작업을 지원합니다. 
+|===

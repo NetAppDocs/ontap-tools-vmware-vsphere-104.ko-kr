@@ -1,0 +1,36 @@
+---
+section: protect
+title: 데이터 저장소 및 가상 머신 보호
+entries:
+- title: 호스트 클러스터 보호를 사용하여 보호
+  url: "/configure/protect-cluster.html"
+- title: SRA 보호를 사용하여 보호하세요
+  entries:
+  - title: 데이터 저장소를 보호하기 위한 SRA 구성
+    url: "/protect/enable-storage-replication-adapter.html"
+  - title: SAN 및 NAS 환경에 대한 SRA 구성
+    url: "/protect/configure-storage-replication-adapter-for-san-environment.html"
+  - title: 확장성이 높은 환경에 맞게 SRA 구성
+    url: "/protect/configure-storage-replication-adapter-for-highly-scaled-environment.html"
+  - title: VMware Live Site Recovery 어플라이언스에서 SRA 구성
+    url: "/protect/configure-on-srm-appliance.html"
+  - title: SRA 자격 증명 업데이트
+    url: "/protect/update-credentials.html"
+  - title: 보호 및 복구 사이트 구성
+    url: "/protect/configure-protection-groups.html"
+  - title: 보호 및 복구 사이트 리소스 구성
+    entries:
+    - title: 네트워크 매핑 구성
+      url: "/protect/map-network.html"
+    - title: 폴더 매핑 구성
+      url: "/protect/map-folder.html"
+    - title: 리소스 매핑 구성
+      url: "/protect/map-resource.html"
+    - title: 플레이스홀더 데이터 저장소 구성
+      url: "/protect/configure-placeholder-datastores.html"
+    - title: 어레이 관리자를 사용하여 SRA 구성
+      url: "/protect/configure-array-manager.html"
+  - title: 복제된 스토리지 시스템 확인
+    url: "/protect/verify-the-replicated-storage-environment.html"
+  - title: 팬아웃 보호
+    url: "/protect/fan-out-protection.html"

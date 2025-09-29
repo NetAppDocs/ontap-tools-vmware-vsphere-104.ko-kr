@@ -1,0 +1,70 @@
+---
+permalink: protect/configure-storage-replication-adapter-for-san-environment.html 
+sidebar: sidebar 
+keywords:  
+summary: 'VMware Live Site Recovery를 위해 Storage Replication Adapter (SRA)를 실행하기 전에 스토리지 시스템을 설정해야 합니다.' 
+---
+= SAN 및 NAS 환경에 대한 SRA 구성
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+VMware Live Site Recovery를 위한 Storage Replication Adapter(SRA)를 실행하기 전에 스토리지 시스템을 설정해야 합니다.
+
+
+
+== SAN 환경에 대한 SRA 구성
+
+.시작하기 전에
+보호 사이트와 복구 사이트에 다음 프로그램이 설치되어 있어야 합니다.
+
+* VMware 라이브 사이트 복구
++
+VMware Live Site Recovery 설치에 대한 설명서는 VMware 사이트에서 확인할 수 있습니다.
+
++
+https://techdocs.broadcom.com/us/en/vmware-cis/live-recovery/live-site-recovery/9-0/about-vmware-live-site-recovery-installation-and-configuration.html["VMware Live Site Recovery 정보"]
+
+* 에스에이알에이
++
+어댑터는 VMware Live Site Recovery에 설치됩니다.
+
+
+
+.단계
+. 보호된 사이트의 기본 스토리지 시스템에 있는 LUN에 기본 ESXi 호스트가 연결되어 있는지 확인합니다.
+. LUN이 다음이 있는 igroup에 있는지 확인하십시오. `ostype` 기본 스토리지 시스템에서 옵션이 _VMware_로 설정되었습니다.
+. 복구 사이트의 ESXi 호스트에 스토리지 가상 머신(SVM)에 대한 적절한 iSCSI 연결이 있는지 확인합니다. 보조 사이트 ESXi 호스트는 보조 사이트 스토리지에 액세스할 수 있어야 하고, 기본 사이트 ESXi 호스트는 기본 사이트 스토리지에 액세스할 수 있어야 합니다.
++
+ESXi 호스트에 SVM에 연결된 로컬 LUN이 있는지 확인하거나 다음을 수행하여 이 작업을 수행할 수 있습니다. `iscsi show initiators` SVM에 대한 명령.  ESXi 호스트에서 매핑된 LUN에 대한 LUN 액세스를 확인하여 iSCSI 연결을 확인합니다.
+
+
+
+
+
+== NAS 환경에 대한 SRA 구성
+
+.시작하기 전에
+보호 사이트와 복구 사이트에 다음 프로그램이 설치되어 있어야 합니다.
+
+* VMware 라이브 사이트 복구
++
+VMware Live Site Recovery 설치에 대한 설명서는 VMware 사이트에서 찾을 수 있습니다.
+
++
+https://techdocs.broadcom.com/us/en/vmware-cis/live-recovery/live-site-recovery/9-0/about-vmware-live-site-recovery-installation-and-configuration.html["VMware Live Site Recovery 정보"]
+
+* 에스에이알에이
++
+어댑터는 VMware Live Site Recovery와 SRA 서버에 설치됩니다.
+
+
+
+.단계
+. 보호된 사이트의 데이터스토어에 vCenter Server에 등록된 가상 머신이 포함되어 있는지 확인합니다.
+. 보호된 사이트의 ESXi 호스트가 스토리지 가상 머신(SVM)에서 NFS 내보내기 볼륨을 마운트했는지 확인합니다.
+. Array Manager 마법사를 사용하여 VMware Live Site Recovery에 어레이를 추가할 때, NFS 내보내기가 있는 IP 주소나 FQDN과 같은 유효한 주소가 *NFS 주소* 필드에 지정되어 있는지 확인하십시오. *NFS 주소 * 필드에 NFS 호스트 이름을 사용하지 마십시오.
+. 사용하다 `ping` 복구 사이트의 각 ESXi 호스트에서 명령을 실행하여 SVM에서 NFS 내보내기를 제공하는 데 사용되는 IP 주소에 액세스할 수 있는 VMkernel 포트가 호스트에 있는지 확인합니다.
+

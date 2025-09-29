@@ -1,0 +1,20 @@
+---
+permalink: release-notes/release-notes.html 
+sidebar: sidebar 
+keywords: release notes, ontap tools for VMware vSphere 
+summary: ONTAP tools for VMware vSphere 의 이번 릴리스에 대한 중요 정보를 제공합니다. 여기에는 새로운 기능 및 향상된 기능, 해결된 문제, 알려진 문제, 주의 사항 및 제한 사항이 포함됩니다. 
+---
+= 릴리스 노트
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP tools for VMware vSphere 에서 사용할 수 있는 새롭고 향상된 기능에 대해 알아보세요.
+
+새로운 기능 및 향상된 기능의 전체 목록은 다음을 참조하세요.xref:whats-new.adoc[ONTAP tools for VMware vSphere 의 새로운 기능] .
+
+ONTAP tools for VMware vSphere 에서 ONTAP 도구 10.4로 마이그레이션하는 것이 배포에 적합한지 자세히 알아보려면 다음을 참조하세요.xref:ontap-tools-9-ontap-tools-10-feature-comparison.adoc[ONTAP tools for VMware vSphere 와 ONTAP tools for VMware vSphere 기능 비교] .  ONTAP tools for VMware vSphere 에서 ONTAP tools for VMware vSphere 로의 마이그레이션이 지원됩니다.
+
+자세한 내용은 다음을 참조하세요. https://library.netapp.com/ecm/ecm_download_file/ECMLP3343864["ONTAP tools for VMware vSphere"^] . 릴리스 노트에 액세스하려면 NetApp 계정으로 로그인하거나 계정을 만들어야 합니다.

@@ -1,0 +1,132 @@
+---
+permalink: deploy/deployment-error-codes.html 
+sidebar: sidebar 
+keywords: upgrade 
+summary: 이 페이지에서는 ONTAP tools for VMware vSphere 의 배포, 재부팅 및 복구 작업에 대한 오류 코드를 간략하게 설명합니다. 
+---
+= 배포 오류 코드
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP tools for VMware vSphere 사용 중 오류 코드가 발생할 수 있습니다.  오류 코드는 5자리 숫자로, 처음 두 자리는 문제가 발생한 스크립트를 나타내고, 마지막 세 자리는 해당 스크립트 내의 특정 워크플로를 나타냅니다.
+
+모든 오류 로그는 ansible-perl-errors.log 파일에 기록되어 문제를 쉽게 추적하고 해결할 수 있습니다. 이 로그 파일에는 오류 코드와 실패한 Ansible 작업이 포함되어 있습니다.
+
+
+NOTE: 이 페이지에 제공된 오류 코드는 참조용일 뿐입니다.  오류가 지속되거나 해결 방법이 언급되지 않으면 지원팀에 문의하세요.
+
+다음 표에는 오류 코드와 해당 파일 이름이 나열되어 있습니다.
+
+|===
+
+
+| *오류 코드* | *스크립트 이름* 
+
+
+| 00 | firstboot-network-config.pl, 배포 모드 
+
+
+| 01 | firstboot-network-config.pl, 모드 업그레이드 
+
+
+| 02 | firstboot-inputs-validation.pl 
+
+
+| 03 | firstboot-deploy-otv-ng.pl, 배포, HA 
+
+
+| 04 | firstboot-deploy-otv-ng.pl, 배포, 비HA 
+
+
+| 05 | firstboot-deploy-otv-ng.pl, 재부팅 
+
+
+| 06 | firstboot-deploy-otv-ng.pl, 업그레이드, HA 
+
+
+| 07 | firstboot-deploy-otv-ng.pl, 업그레이드, 비 HA 
+
+
+| 08 | firstboot-otv-recovery.pl 
+
+
+| 09 | post-deploy-upgrade.pl 
+|===
+오류 코드의 마지막 세 자리는 스크립트 내의 특정 워크플로 오류를 나타냅니다.
+
+|===
+
+
+| *배포 오류 코드* | *작업 흐름* | *해결* 
+
+
+| 049 | 네트워크 및 검증을 위해 Perl 스크립트도 곧 할당됩니다. | - 
+
+
+| 050 | SSH 키 생성에 실패했습니다 | 기본 가상 머신(VM)을 다시 시작합니다. 
+
+
+| 053 | RKE2 설치에 실패했습니다 | 다음을 실행하고 기본 VM을 다시 시작하거나 다시 배포합니다. sudo rke2-killall.sh(모든 VM) sudo rke2-uninstall.sh(모든 VM). 
+
+
+| 054 | kubeconfig 설정에 실패했습니다. | 재배치 
+
+
+| 055 | 레지스트리 배포에 실패했습니다. | 레지스트리 포드가 있는 경우 포드가 준비될 때까지 기다린 다음 기본 VM을 다시 시작하거나 그렇지 않은 경우 다시 배포합니다. 
+
+
+| 059 | KubeVip 배포에 실패했습니다. | Kubernetes 제어 평면과 ONTAP 도구에 대한 가상 IP 주소를 확인하세요. 배포 중에 제공된 IP 주소는 동일한 VLAN에 속하며 사용 가능한 IP 주소입니다.  이전 사항이 모두 정확하다면 다시 시작하세요.  그렇지 않으면 재배치하세요. 
+
+
+| 060 | 운영자 배포에 실패했습니다 | 다시 시작 
+
+
+| 061 | 서비스 배포에 실패했습니다 | ntv-system 네임스페이스에서 get pods, get rs, get svc 등과 같은 기본 Kubernetes 디버깅을 수행하여 자세한 내용과 오류 로그를 /var/log/ansible-perl-errors.log 및 /var/log/ansible-run.log에 기록하고 다시 배포합니다. 
+
+
+| 062 | ONTAP 도구 서비스 배포에 실패했습니다. | 자세한 내용은 /var/log/ansible-perl-errors.log의 오류 로그를 참조하고 다시 배포하세요. 
+
+
+| 065 | Swagger 페이지 URL에 접근할 수 없습니다. | 재배치 
+
+
+| 066 | 게이트웨이 인증서에 대한 배포 후 단계가 실패했습니다. | 업그레이드를 복구/완료하려면 다음을 수행하세요. * 진단 셸을 활성화합니다.  * 'sudo perl /home/maint/scripts/post-deploy-upgrade.pl --postDeploy' 명령을 실행합니다.  * /var/log/post-deploy-upgrade.log에서 로그를 확인하세요. 
+
+
+| 088 | journald에 대한 로그 회전 구성에 실패했습니다. | VM이 호스팅되는 호스트와 호환되는 VM 네트워크 설정을 확인하세요.  다른 호스트로 마이그레이션하고 VM을 다시 시작해 보세요. 
+
+
+| 089 | 요약 로그 회전 구성 파일의 소유권을 변경하는 데 실패했습니다. | 기본 VM을 다시 시작합니다. 
+
+
+| 096 | 동적 스토리지 프로비저너 설치 | - 
+
+
+| 108 | 시드 스크립트가 실패했습니다 | - 
+|===
+|===
+
+
+| *재부팅 오류 코드* | *작업 흐름* | *해결* 
+
+
+| 067 | rke2-server 대기 시간이 초과되었습니다. | - 
+
+
+| 101 | Maint/Console 사용자 비밀번호를 재설정하지 못했습니다. | - 
+
+
+| 102 | Maint/Console 사용자 비밀번호를 재설정하는 동안 비밀번호 파일을 삭제하지 못했습니다. | - 
+
+
+| 103 | 볼트에서 새로운 Maint/Console 사용자 비밀번호를 업데이트하지 못했습니다. | - 
+
+
+| 088 | journald에 대한 로그 회전 구성에 실패했습니다. | VM이 호스팅되는 호스트와 호환되는 VM 네트워크 설정을 확인하세요.  다른 호스트로 마이그레이션하고 VM을 다시 시작해 보세요. 
+
+
+| 089 | 요약 로그 회전 구성 파일의 소유권을 변경하는 데 실패했습니다. | VM을 다시 시작합니다. 
+|===

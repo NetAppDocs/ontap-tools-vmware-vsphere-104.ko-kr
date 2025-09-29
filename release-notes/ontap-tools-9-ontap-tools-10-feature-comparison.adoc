@@ -1,0 +1,46 @@
+---
+permalink: release-notes/ontap-tools-9-ontap-tools-10-feature-comparison.html 
+sidebar: sidebar 
+keywords: release notes, feature, comparison 
+summary: ONTAP tools for VMware vSphere 와 ONTAP tools for VMware vSphere 기능 비교에 대해 알아보세요. 
+---
+= ONTAP tools for VMware vSphere 와 ONTAP tools for VMware vSphere 기능 비교
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP tools for VMware vSphere 에서 ONTAP tools for VMware vSphere 로 마이그레이션하는 것이 적합한지 알아보세요.
+
+
+NOTE: 최신 호환성 정보는 다음을 참조하세요. https://mysupport.netapp.com/matrix["NetApp 상호 운용성 매트릭스 도구"^] .
+
+[cols="20%,25%,25%,30%"]
+|===
+| 특징 | ONTAP 도구 9.13 | ONTAP 도구 10.1 | ONTAP 도구 10.2 이상 
+
+
+| 핵심 가치 제안 | 향상된 보안, 규정 준수 및 자동화 기능으로 0일차부터 2일차까지의 운영을 간소화하고 단순화합니다. | 고가용성, 성능 및 확장 한계를 확장하면서 ONTAP 도구 10.x를 9.xx 패리티로 발전시킵니다. | VMFS 및 vVols 에 대한 FC, VMFS에 대한 NVMe-oF/FC, NVMe-oF/TCP를 포함하도록 지원이 확대되었습니다.  NetApp SnapMirror 의 사용 편의성, vSphere 메트로 스토리지 클러스터의 간단한 설정, 3개 사이트 VMware Live Site Recovery 지원 
+
+
+| ONTAP 릴리스 자격 | ONTAP 9.9.1에서 ONTAP 9.16.1로 | ONTAP 9.12.1에서 ONTAP 9.14.1로 | ONTAP 도구 10.2를 위한 ONTAP 9.12.1~ ONTAP 9.15.1. ONTAP 도구 10.3용 ONTAP 9.14.1, 9.15.1, 9.16.0 및 9.16.1. ONTAP 도구 10.4용 ONTAP 9.14.1, 9.15.1, 9.16.0 및 9.16.1. ASA r2 시스템을 사용하는 경우 ONTAP 도구 10.4에 ONTAP 9.16.1P3 이상이 필요합니다. 
+
+
+| VMware 릴리스 지원 | vSphere 7.x-8.x VMware Site Recovery Manager(SRM) 8.5에서 VMware Live Site Recovery 9.0으로 | vSphere 7.x-8.x VMware Site Recovery Manager(SRM) 8.7에서 VMware Live Site Recovery 9.0으로 | vSphere 7.x-8.x VMware Site Recovery Manager(SRM) 8.7에서 VMware Live Site Recovery 9.0으로 
+
+
+| 프로토콜 지원 | NFS 및 VMFS 데이터 저장소: NFS(v3 및 v4.1), VMFS(iSCSI 및 FCP) vVols 데이터 저장소: iSCSI, FCP, NVMe/FC, NFS v3 | NFS 및 VMFS 데이터 저장소: NFS(v3 및 v4.1), VMFS(iSCSI) vVols 데이터 저장소: iSCSI, NFS v3 | NFS 및 VMFS 데이터 저장소: NFS(v3 및 v4.1), VMFS(iSCSI/FCP/NVMe-oF) vVols 데이터 저장소: iSCSI, FCP, NFS v3 
+
+
+| 확장성 | 호스트 및 VM: 300개 호스트, 최대 10,000개 VM 데이터 저장소: 600개 NFS, 최대 50개 VMFS, 최대 250개 vVols vVols: 최대 14,000개 | 호스트 및 VM: 600개 호스트 vVols: 최대 140,000개 | 호스트 및 VM: 600개 호스트 vVols: 최대 140,000개 
+
+
+| 관찰 가능성 | 성능, 용량 및 호스트 규정 준수 대시보드 동적 VM 및 데이터 저장소 보고서 | 업데이트된 성능, 용량 및 호스트 규정 준수 대시보드 동적 VM 및 데이터 저장소 보고서 | 업데이트된 성능, 용량 및 호스트 규정 준수 대시보드 동적 VM 및 데이터 저장소 보고서 
+
+
+| 데이터 보호 | VMFS 및 NFS를 위한 SRA 복제 vVols SCV 통합을 위한 FlexVols 기반 복제 및 백업을 위한 상호 운용성 | iSCSI VMFS 및 NFS v3 데이터 저장소에 대한 SRA 복제 | SMAS와 VMware Live Site Recovery를 결합한 3개 사이트 보호, iSCSI VMFS 및 NFS v3 데이터 저장소를 위한 SRA 복제. 
+
+
+| VASA 공급자 지원 | VASA 4.0 | VASA 3.0 | VASA 3.0 
+|===

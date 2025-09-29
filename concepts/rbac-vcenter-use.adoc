@@ -1,0 +1,94 @@
+---
+permalink: concepts/rbac-vcenter-use.html 
+sidebar: sidebar 
+keywords: vcenter, vcenter server, vcenter server rbac, use rbac 
+summary: vCenter Server를 사용하여 ONTAP tools for VMware vSphere 에는 프로덕션 환경에서 사용하기 전에 고려해야 할 여러 가지 측면이 있습니다. 
+---
+= ONTAP tools for VMware vSphere 와 함께 vCenter Server RBAC 사용
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+vCenter Server를 사용하여 ONTAP tools for VMware vSphere 에는 프로덕션 환경에서 사용하기 전에 고려해야 할 여러 가지 측면이 있습니다.
+
+
+
+== vCenter 역할 및 관리자 계정
+
+vSphere 개체 및 관련 관리 작업에 대한 액세스를 제한하려는 경우에만 사용자 지정 vCenter Server 역할을 정의하고 사용하면 됩니다.  접근 제한이 필요하지 않은 경우 대신 관리자 계정을 사용할 수 있습니다.  각 관리자 계정은 개체 계층의 최상위에 있는 관리자 역할로 정의됩니다.  이를 통해 ONTAP tools for VMware vSphere 에서 추가된 개체를 포함하여 vSphere 개체에 대한 전체 액세스가 제공됩니다.
+
+
+
+== vSphere 개체 계층 구조
+
+vSphere 개체 인벤토리는 계층 구조로 구성됩니다.  예를 들어, 다음과 같이 계층 구조를 아래로 이동할 수 있습니다.
+
+`vCenter Server`--> `Datacenter` --> `Cluster` --> `ESXi host` --> `Virtual Machine`
+
+VAAI 플러그인 작업을 제외한 모든 권한은 vSphere 개체 계층에서 검증되며, 해당 작업은 대상 ESXi 호스트를 기준으로 검증됩니다.
+
+
+
+== ONTAP tools for VMware vSphere 에 포함된 역할
+
+vCenter Server RBAC 작업을 간소화하기 위해 ONTAP tools for VMware vSphere 다양한 관리 작업에 맞게 미리 정의된 역할을 제공합니다.
+
+
+NOTE: 필요한 경우 새로운 사용자 정의 역할을 만들 수 있습니다.  이 경우 기존 ONTAP 도구 역할 중 하나를 복제하고 필요에 따라 편집해야 합니다.  구성을 변경한 후에는 영향을 받는 vSphere 클라이언트 사용자는 로그아웃했다가 다시 로그인하여 변경 사항을 활성화해야 합니다.
+
+ONTAP tools for VMware vSphere 보려면 vSphere Client 상단에서 *메뉴*를 선택하고 *관리*를 클릭한 다음 왼쪽에서 *역할*을 클릭합니다.  아래에 설명된 대로 미리 정의된 역할이 세 가지 있습니다.
+
+.VMware vSphere 관리자를 위한 NetApp ONTAP tools for VMware vSphere
+ONTAP tools for VMware vSphere 수행하는 데 필요한 모든 기본 vCenter Server 권한과 ONTAP 도구 관련 권한을 제공합니다.
+
+.ONTAP tools for VMware vSphere NetApp ONTAP 도구(읽기 전용)
+ONTAP 도구에 대한 읽기 전용 액세스를 제공합니다.  이러한 사용자는 액세스가 제어되는 ONTAP tools for VMware vSphere 수행할 수 없습니다.
+
+.VMware vSphere Provision을 위한 NetApp ONTAP tools for VMware vSphere
+스토리지 프로비저닝에 필요한 일부 기본 vCenter Server 권한과 ONTAP 도구 관련 권한을 제공합니다.  다음 작업을 수행할 수 있습니다.
+
+* 새로운 데이터 저장소 만들기
+* 데이터 저장소 관리
+
+
+
+
+== vSphere 객체 및 ONTAP 스토리지 백엔드
+
+두 RBAC 환경은 함께 작동합니다.  vSphere 클라이언트 인터페이스에서 작업을 수행할 때 vCenter Server에 정의된 ONTAP 도구 역할이 먼저 확인됩니다.  vSphere에서 작업이 허용되는 경우 ONTAP 역할 권한이 검사됩니다.  두 번째 단계는 스토리지 백엔드가 생성되고 구성될 때 사용자에게 할당된 ONTAP 역할에 따라 수행됩니다.
+
+
+
+== vCenter Server RBAC 작업
+
+vCenter Server 권한 및 사용 권한을 사용할 때 고려해야 할 몇 가지 사항이 있습니다.
+
+
+
+=== 필수 권한
+
+ONTAP tools for VMware vSphere 에 액세스하려면 ONTAP 도구 관련 _View_ 권한이 필요합니다.  이 권한 없이 vSphere에 로그인하고 NetApp 아이콘을 클릭하면 ONTAP tools for VMware vSphere 오류 메시지가 표시되고 사용자 인터페이스에 액세스할 수 없습니다.
+
+vSphere 개체 계층의 할당 수준에 따라 사용자 인터페이스의 어떤 부분에 액세스할 수 있는지가 결정됩니다.  루트 개체에 보기 권한을 할당하면 NetApp 아이콘을 클릭하여 ONTAP tools for VMware vSphere 액세스할 수 있습니다.
+
+대신 보기 권한을 다른 하위 vSphere 개체 수준에 할당할 수 있습니다.  하지만 이렇게 하면 액세스하고 사용할 수 있는 ONTAP tools for VMware vSphere 제한됩니다.
+
+
+
+=== 권한 할당
+
+vSphere 개체 및 작업에 대한 액세스를 제한하려면 vCenter Server 권한을 사용해야 합니다.  vSphere 개체 계층에서 권한을 할당하는 위치에 따라 ONTAP tools for VMware vSphere 사용자가 수행할 수 있는 작업이 결정됩니다.
+
+
+TIP: 더 제한적인 액세스를 정의할 필요가 없는 한 일반적으로 루트 개체나 루트 폴더 수준에서 권한을 할당하는 것이 좋습니다.
+
+ONTAP tools for VMware vSphere 에서 제공하는 권한은 스토리지 시스템과 같은 사용자 지정 비 vSphere 개체에 적용됩니다.  가능하다면 ONTAP tools for VMware vSphere 에 이러한 권한을 할당해야 합니다. 할당할 수 있는 vSphere 개체가 없기 때문입니다.  예를 들어, ONTAP tools for VMware vSphere "스토리지 시스템 추가/수정/제거" 권한이 포함된 모든 권한은 루트 개체 수준에서 할당되어야 합니다.
+
+개체 계층 구조에서 상위 레벨의 권한을 정의할 때 해당 권한이 하위 개체에 전달되고 상속되도록 구성할 수 있습니다.  필요한 경우 부모로부터 상속받은 권한을 재정의하는 추가 권한을 자식 개체에 할당할 수 있습니다.
+
+언제든지 권한을 수정할 수 있습니다.  권한 내의 권한을 변경하는 경우 해당 권한과 연결된 사용자는 vSphere에서 로그아웃했다가 다시 로그인하여 변경 사항을 적용해야 합니다.

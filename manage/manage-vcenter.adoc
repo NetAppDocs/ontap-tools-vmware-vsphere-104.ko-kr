@@ -1,0 +1,63 @@
+---
+permalink: manage/manage-vcenter.html 
+sidebar: sidebar 
+keywords:  
+summary: vCenter는 호스트, 가상 머신, 스토리지 백엔드를 제어할 수 있는 중앙 관리 플랫폼입니다. 
+---
+= vCenter Server 인스턴스 관리
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+vCenter Server 인스턴스는 호스트, 가상 머신, 스토리지 백엔드를 제어할 수 있는 중앙 관리 플랫폼입니다.
+
+
+
+== vCenter Server 인스턴스와 스토리지 백엔드 연결 해제
+
+vCenter Server 목록 페이지에는 연관된 스토리지 백엔드 수가 표시됩니다.  각 vCenter Server 인스턴스에는 스토리지 백엔드와 연결하거나 연결 해제하는 옵션이 있습니다.
+
+.단계
+. 웹 브라우저에서 ONTAP 도구 관리자를 실행합니다. `\https://<ONTAPtoolsIP>:8443/virtualization/ui/`
+. 배포 중에 제공한 ONTAP tools for VMware vSphere 로 로그인합니다.
+. 사이드바에서 필요한 vCenter Server 인스턴스를 선택합니다.
+. 스토리지 백엔드와 연결하거나 연결 해제하려는 vCenter Server에 대한 세로 줄임표를 선택합니다.
+. *저장소 백엔드 분리*를 선택합니다.
+
+
+
+
+== vCenter Server 인스턴스 수정
+
+vCenter Server 인스턴스를 수정하려면 아래 단계를 따르세요.
+
+. 웹 브라우저에서 ONTAP 도구 관리자를 실행합니다. `\https://<ONTAPtoolsIP>:8443/virtualization/ui/`
+. 배포 중에 제공한 ONTAP tools for VMware vSphere 로 로그인합니다.
+. 사이드바에서 해당 vCenter Server 인스턴스를 선택하세요.
+. 수정하려는 vCenter Server에 대한 세로 줄임표를 선택하고 *수정*을 선택합니다.
+. vCenter Server 인스턴스 세부 정보를 수정하고 *수정*을 선택합니다.
+
+
+
+
+== vCenter Server 인스턴스 제거
+
+vCenter Server를 제거하기 전에 해당 서버에 연결된 모든 스토리지 백엔드를 제거해야 합니다.
+
+. 웹 브라우저에서 ONTAP 도구 관리자를 실행합니다. `\https://<ONTAPtoolsIP>:8443/virtualization/ui/`
+. 배포 중에 제공한 ONTAP tools for VMware vSphere 로 로그인합니다.
+. 사이드바에서 해당 vCenter Server 인스턴스를 선택하세요.
+. 제거하려는 vCenter Server에 대한 세로 줄임표를 선택하고 *제거*를 선택합니다.
++
+
+NOTE: vCenter Server 인스턴스를 제거하면 애플리케이션에서 더 이상 유지 관리되지 않습니다.
+
+
+
+ONTAP 도구에서 vCenter Server 인스턴스를 제거하면 다음 작업이 자동으로 수행됩니다.
+
+* 플러그인이 등록되지 않았습니다.
+* 플러그인 권한과 플러그인 역할이 제거됩니다.
+

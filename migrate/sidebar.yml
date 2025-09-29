@@ -1,0 +1,8 @@
+---
+section: migrate
+title: ONTAP tools for VMware vSphere 10.4로 마이그레이션
+entries:
+- title: ONTAP tools for VMware vSphere 로 마이그레이션
+  url: "/migrate/migrate-to-latest-ontaptools.html"
+- title: VASA 공급자를 마이그레이션하고 SRA를 업데이트합니다.
+  url: "/migrate/sra-vasa-migration.html"

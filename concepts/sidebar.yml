@@ -1,0 +1,28 @@
+---
+section: concepts
+title: 개념
+entries:
+- title: ONTAP tools for VMware vSphere 개요
+  url: "/concepts/ontap-tools-overview.html"
+- title: 주요 개념 및 용어
+  url: "/concepts/ontap-tools-concepts-terms.html"
+- title: 역할 기반 액세스 제어
+  entries:
+  - title: RBAC에 대해 알아보세요
+    url: "/concepts/rbac-learn-about.html"
+  - title: VMware vSphere를 사용한 RBAC
+    entries:
+    - title: vCenter Server 환경
+      url: "/concepts/rbac-vcenter-environment.html"
+    - title: vCenter Server와 함께 RBAC 사용
+      url: "/concepts/rbac-vcenter-use.html"
+  - title: ONTAP 사용한 RBAC
+    entries:
+    - title: ONTAP 환경
+      url: "/concepts/rbac-ontap-environment.html"
+    - title: ONTAP 과 함께 RBAC 사용
+      url: "/concepts/rbac-ontap-use.html"
+- title: ONTAP tools for VMware vSphere 의 고가용성
+  url: "/concepts/high-availability.html"
+- title: ONTAP 도구 관리자 사용자 인터페이스
+  url: "/configure/manager-user-interface.html"

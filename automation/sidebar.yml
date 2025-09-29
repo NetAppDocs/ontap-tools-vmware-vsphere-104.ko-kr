@@ -1,0 +1,12 @@
+---
+section: automation
+title: REST API를 사용하여 자동화
+entries:
+- title: REST API에 대해 알아보세요
+  url: "/automation/learn-rest-api.html"
+- title: REST 구현
+  url: "/automation/rest-implementation.html"
+- title: 첫 번째 REST API 호출
+  url: "/automation/first-call.html"
+- title: API 참조
+  url: "/automation/api-reference.html"

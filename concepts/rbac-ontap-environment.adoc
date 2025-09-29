@@ -1,0 +1,62 @@
+---
+permalink: concepts/rbac-ontap-environment.html 
+sidebar: sidebar 
+keywords: ontap rbac, ontap rbac environment 
+summary: ONTAP 견고하고 확장 가능한 RBAC 환경을 제공합니다.  RBAC 기능을 사용하면 REST API와 CLI를 통해 노출된 스토리지 및 시스템 작업에 대한 액세스를 제어할 수 있습니다.  ONTAP tools for VMware vSphere 사용하기 전에 해당 환경에 익숙해지는 것이 좋습니다. 
+---
+= ONTAP tools for VMware vSphere 사용한 ONTAP RBAC 환경
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP 견고하고 확장 가능한 RBAC 환경을 제공합니다.  RBAC 기능을 사용하면 REST API와 CLI를 통해 노출된 스토리지 및 시스템 작업에 대한 액세스를 제어할 수 있습니다.  ONTAP tools for VMware vSphere 사용하기 전에 해당 환경에 익숙해지는 것이 좋습니다.
+
+
+
+== 관리 옵션 개요
+
+환경과 목표에 따라 ONTAP RBAC를 사용할 때 사용할 수 있는 여러 가지 옵션이 있습니다.  주요 행정 결정에 대한 개요는 아래와 같습니다.  또한 참조 https://docs.netapp.com/us-en/ontap-automation/rest/rbac_overview.html["ONTAP 자동화: RBAC 보안 개요"^] 자세한 내용은.
+
+
+NOTE: ONTAP RBAC는 스토리지 환경에 맞춰 설계되었으며 vCenter Server에서 제공하는 RBAC 구현보다 간단합니다. ONTAP 사용하면 사용자에게 직접 역할을 할당할 수 있습니다. ONTAP RBAC에서는 vCenter Server에서 사용되는 것과 같은 명시적 권한을 구성할 필요가 없습니다.
+
+.역할 및 권한 유형
+ONTAP 사용자를 정의하려면 ONTAP 역할이 필요합니다.  ONTAP 역할에는 두 가지 유형이 있습니다.
+
+* 나머지
++
+REST 역할은 ONTAP 9.6에서 도입되었으며 일반적으로 REST API를 통해 ONTAP 에 액세스하는 사용자에게 적용됩니다.  이러한 역할에 포함된 권한은 ONTAP REST API 엔드포인트와 관련 작업에 대한 액세스 측면에서 정의됩니다.
+
+* 전통적인
++
+이는 ONTAP 9.6 이전에 포함된 레거시 역할입니다.  그것들은 RBAC의 기초적인 측면으로 계속 유지됩니다.  권한은 ONTAP CLI 명령에 대한 액세스 측면에서 정의됩니다.
+
+
+
+REST 역할은 최근에 도입되었지만, 기존 역할에도 몇 가지 장점이 있습니다.  예를 들어, 추가 쿼리 매개변수를 선택적으로 포함시켜 권한이 적용되는 개체를 보다 정확하게 정의할 수 있습니다.
+
+.범위
+ONTAP 역할은 두 가지 범위 중 하나로 정의할 수 있습니다.  이러한 기능은 특정 데이터 SVM(SVM 수준)이나 전체 ONTAP 클러스터(클러스터 수준)에 적용될 수 있습니다.
+
+.역할 정의
+ONTAP 클러스터와 SVM 수준 모두에서 미리 정의된 역할 세트를 제공합니다.  사용자 정의 역할을 정의할 수도 있습니다.
+
+
+
+== ONTAP REST 역할 작업
+
+ONTAP tools for VMware vSphere 에 포함된 ONTAP REST 역할을 사용할 때는 몇 가지 고려 사항이 있습니다.
+
+.역할 매핑
+기존 역할이나 REST 역할을 사용하든 모든 ONTAP 액세스 결정은 기본 CLI 명령을 기반으로 내려집니다.  하지만 REST 역할의 권한은 REST API 엔드포인트에 따라 정의되므로 ONTAP 각 REST 역할에 대해 _매핑된_ 기존 역할을 만들어야 합니다.  따라서 각 REST 역할은 기본적인 기존 역할에 매핑됩니다.  이를 통해 ONTAP 역할 유형에 관계없이 일관된 방식으로 액세스 제어 결정을 내릴 수 있습니다.  병렬 매핑된 역할은 수정할 수 없습니다.
+
+.CLI 권한을 사용하여 REST 역할 정의
+ONTAP 항상 CLI 명령을 사용하여 기본 수준에서 액세스를 결정하므로 REST 엔드포인트 대신 CLI 명령 권한을 사용하여 REST 역할을 표현할 수 있습니다.  이 접근 방식의 장점 중 하나는 기존 역할에서 사용할 수 있는 추가적인 세분성입니다.
+
+.ONTAP 역할 정의 시 관리 인터페이스
+ONTAP CLI와 REST API를 사용하여 사용자와 역할을 생성할 수 있습니다.  하지만 ONTAP 도구 관리자를 통해 제공되는 JSON 파일과 함께 시스템 관리자 인터페이스를 사용하는 것이 더 편리합니다. 보다 link:../concepts/rbac-ontap-use.html["ONTAP tools for VMware vSphere 와 함께 ONTAP RBAC 사용"] 자세한 내용은.

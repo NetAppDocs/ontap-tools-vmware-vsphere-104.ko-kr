@@ -1,0 +1,23 @@
+---
+permalink: manage/mount-a-vvols-datastore.html 
+sidebar: sidebar 
+keywords: Mount vVol 
+summary: '[vVols 데이터스토어 마운트] 대화 상자를 사용하여 VMware Virtual Volumes \( vVols \) 데이터스토어를 하나 이상의 추가 호스트에 마운트할 수 있습니다.  데이터스토어를 마운트하면 추가 호스트에 대한 스토리지 액세스가 제공됩니다.  API를 통해서만 vVols 데이터 저장소를 마운트 해제할 수 있습니다.' 
+---
+= vVols 데이터 저장소 마운트
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+하나 이상의 추가 호스트에 VMware Virtual Volumes(vVols) 데이터 저장소를 마운트하여 추가 호스트에 대한 스토리지 액세스를 제공할 수 있습니다.  API를 통해서만 vVols 데이터 저장소를 마운트 해제할 수 있습니다.
+
+.단계
+. vSphere Client 홈페이지에서 *호스트 및 클러스터*를 선택합니다.
+. 탐색 창에서 데이터 저장소가 포함된 데이터 센터를 선택합니다.
+. 데이터 저장소를 마우스 오른쪽 버튼으로 클릭하고 * NetApp ONTAP 도구* > *데이터 저장소 마운트*를 선택합니다.
+. *호스트에 데이터스토어 마운트* 대화 상자에서 데이터스토어를 마운트할 호스트를 선택한 다음 *마운트*를 선택합니다.
+
+
+최근 작업 패널에서 진행 상황을 추적할 수 있습니다.

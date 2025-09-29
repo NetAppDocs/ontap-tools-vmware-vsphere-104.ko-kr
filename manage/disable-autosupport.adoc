@@ -1,0 +1,24 @@
+---
+permalink: manage/disable-autosupport.html 
+sidebar: sidebar 
+keywords:  
+summary: 처음으로 스토리지 시스템을 구성하는 경우 AutoSupport 기본적으로 활성화됩니다. 이 기능이 활성화된 후 24시간 이내에 기술 지원팀에 메시지가 전송됩니다. 
+---
+= AutoSupport 비활성화
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+처음으로 스토리지 시스템을 구성하는 경우 AutoSupport 기본적으로 활성화됩니다. 이 기능이 활성화된 후 24시간 이내에 기술 지원팀에 메시지가 전송됩니다.  AutoSupport 비활성화하면 더 이상 사전 지원 및 모니터링을 받을 수 없습니다.
+
+
+NOTE: AutoSupport 활성화해 두는 것이 좋습니다.  이는 문제 탐지 및 해결 속도를 높이는 데 도움이 됩니다.  이 시스템은 AutoSupport 정보를 수집하여 비활성화된 경우에도 로컬에 저장합니다.  하지만 어떤 네트워크에도 보고서를 전송하지는 않습니다.
+
+.단계
+. 웹 브라우저에서 ONTAP 도구 관리자를 실행합니다. `\https://<ONTAPtoolsIP>:8443/virtualization/ui/`
+. 배포 중에 제공한 ONTAP tools for VMware vSphere 로 로그인합니다.
+. *설정* > *원격측정* > *편집* 옵션을 선택하세요.
+. * AutoSupport* 옵션의 선택을 해제하고 변경 사항을 저장합니다.
+

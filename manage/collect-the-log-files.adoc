@@ -1,0 +1,42 @@
+---
+permalink: manage/collect-the-log-files.html 
+sidebar: sidebar 
+keywords:  
+summary: 'ONTAP tools for VMware vSphere 의 로그 파일은 ONTAP tools for VMware vSphere 그래픽 사용자 인터페이스(GUI)에서 제공되는 옵션을 통해 수집할 수 있습니다.  기술 지원팀은 문제 해결을 위해 로그 파일을 수집해 달라고 요청할 수 있습니다.' 
+---
+= 로그 파일을 수집합니다
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP 도구 관리자 사용자 인터페이스에서 제공되는 옵션을 통해 ONTAP tools for VMware vSphere 의 로그 파일을 수집할 수 있습니다.  기술 지원팀은 문제 해결을 위해 로그 파일을 수집해 달라고 요청할 수 있습니다.
+
+
+NOTE: ONTAP 도구 관리자에서 로그를 생성하면 모든 vCenter Server 인스턴스에 대한 모든 로그가 포함됩니다.  vCenter 클라이언트 사용자 인터페이스에서 로그를 생성하는 범위는 선택한 vCenter Server에 국한됩니다.
+
+.단계
+. 웹 브라우저에서 ONTAP 도구 관리자를 실행합니다. `\https://<ONTAPtoolsIP>:8443/virtualization/ui/`
+. 배포 중에 제공한 ONTAP tools for VMware vSphere 로 로그인합니다.
+. 사이드바에서 *로그 번들*을 선택합니다.
++
+이 작업에는 몇 분이 걸릴 수 있습니다.
+
+. *생성*을 선택하여 로그 파일을 생성합니다.
+. 로그 번들에 대한 라벨을 입력하고 *생성*을 선택합니다.
++
+tar.gz 파일을 다운로드하여 기술 지원팀으로 보내세요.
+
+
+
+vCenter 클라이언트 사용자 인터페이스를 사용하여 로그 번들을 생성하려면 아래 단계를 따르세요.
+
+.단계
+. vSphere 클라이언트에 로그인합니다.
+. vSphere Client 홈페이지에서 *지원* > *로그 번들* > *생성*으로 이동합니다.
+. 로그 번들 레이블을 입력하고 로그 번들을 생성하세요. 파일이 생성되면 다운로드 옵션이 표시됩니다. 다운로드하는 데 시간이 다소 걸릴 수 있습니다.
+
+
+
+NOTE: 생성된 로그 번들은 지난 3일 또는 72시간 내에 생성된 로그 번들을 대체합니다.

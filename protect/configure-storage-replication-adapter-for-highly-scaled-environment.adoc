@@ -1,0 +1,68 @@
+---
+permalink: protect/configure-storage-replication-adapter-for-highly-scaled-environment.html 
+sidebar: sidebar 
+keywords:  
+summary: '확장성이 높은 환경에서 최적의 성능을 발휘하려면 Storage Replication Adapter(SRA)에 대한 권장 설정에 따라 스토리지 시간 초과 간격을 구성해야 합니다.' 
+---
+= 확장성이 높은 환경에 맞게 SRA 구성
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+확장성이 높은 환경에서 최적의 성능을 발휘하려면 SRA(Storage Replication Adapter)에 대한 권장 설정에 따라 스토리지 시간 초과 간격을 구성해야 합니다.
+
+
+
+== 저장소 공급자 설정
+
+확장된 환경의 경우 VMware Live Site Recovery에서 다음과 같은 시간 초과 값을 설정해야 합니다.
+
+|===
+
+
+| *고급 설정* | *시간 초과 값* 
+
+
+ a| 
+`StorageProvider.resignatureTimeout`
+ a| 
+설정 값을 900초에서 12000초로 늘립니다.
+
+
+
+ a| 
+`storageProvider.hostRescanDelaySec`
+ a| 
+60
+
+
+
+ a| 
+`storageProvider.hostRescanRepeatCnt`
+ a| 
+20
+
+
+
+ a| 
+`storageProvider.hostRescanTimeoutSec`
+ a| 
+높은 값을 설정하세요(예: 99999)
+
+|===
+또한 다음을 활성화해야 합니다. `StorageProvider.autoResignatureMode` 옵션.
+
+참조하다 https://techdocs.broadcom.com/us/en/vmware-cis/live-recovery/live-site-recovery/9-0/how-do-i-protect-my-environment/advanced-srm-configuration/reconfigure-srm-settings/change-storage-provider-settings.html["저장소 공급자 설정 변경"] 저장소 공급자 설정을 수정하는 방법에 대한 자세한 내용은 다음을 참조하세요.
+
+
+
+== 저장 설정
+
+시간 초과가 발생하면 값을 늘리십시오. `storage.commandTimeout` 그리고 `storage.maxConcurrentCommandCnt` 더 높은 가치로.
+
+
+NOTE: 지정된 시간 초과 간격은 최대값입니다. 최대 시간 초과에 도달할 때까지 기다릴 필요는 없습니다. 대부분의 명령은 설정된 최대 시간 초과 간격 내에 완료됩니다.
+
+참조하다 https://techdocs.broadcom.com/us/en/vmware-cis/live-recovery/live-site-recovery/9-0/how-do-i-protect-my-environment/advanced-srm-configuration/reconfigure-srm-settings/change-storage-settings.html["저장소 설정 변경"] SAN 공급자 설정을 수정하기 위해.

@@ -1,0 +1,36 @@
+---
+permalink: configure/add-vcenter.html 
+sidebar: sidebar 
+keywords:  
+summary: vCenter Server 환경에서 가상 데이터스토어를 구성, 관리 및 보호하기 위해 ONTAP tools for VMware vSphere 에 vCenter Server 인스턴스를 추가합니다. 
+---
+= vCenter Server 인스턴스 추가
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+vCenter Server 환경에서 가상 데이터스토어를 구성, 관리 및 보호하기 위해 ONTAP tools for VMware vSphere 에 vCenter Server 인스턴스를 추가합니다.  여러 vCenter Server 인스턴스를 추가하는 경우 ONTAP 도구와 각 vCenter Server 간의 보안 통신을 위해 사용자 지정 CA 인증서가 필요합니다.
+
+*이 작업에 관하여*
+
+ONTAP 도구를 vCenter와 통합하면 프로비저닝, 스냅샷, 데이터 보호와 같은 스토리지 작업을 vSphere 클라이언트에서 직접 수행할 수 있으므로 별도의 스토리지 관리 콘솔로 전환할 필요가 없습니다.
+
+.단계
+. 웹 브라우저를 열고 다음 URL로 이동하세요. `\https://<ONTAPtoolsIP>:8443/virtualization/ui/`
+. 배포 중에 제공한 ONTAP tools for VMware vSphere 로 로그인합니다.
+. *vCenters* > *Add*를 선택하여 vCenter Server 인스턴스를 온보딩합니다.  vCenter IP 주소 또는 호스트 이름, 사용자 이름, 비밀번호 및 포트 세부 정보를 제공하세요.
++
+
+NOTE: ONTAP 도구에 vCenter 인스턴스를 추가하는 데 관리자 계정은 필요하지 않습니다.  관리자 계정 없이도 제한된 권한으로 사용자 정의 역할을 만들 수 있습니다. 참조하다link:../concepts/rbac-vcenter-use.html["ONTAP tools for VMware vSphere 와 함께 vCenter Server RBAC 사용"] 자세한 내용은.
+
+
+
+ONTAP 도구에 vCenter Server 인스턴스를 추가하면 다음 작업이 자동으로 트리거됩니다.
+
+* vCenter 클라이언트 플러그인은 원격 플러그인으로 등록됩니다.
+* 플러그인과 API에 대한 사용자 정의 권한은 vCenter Server 인스턴스에 적용됩니다.
+* 사용자를 관리하기 위해 사용자 정의 역할이 생성됩니다.
+* 플러그인은 vSphere 사용자 인터페이스에 바로가기로 나타납니다.
+

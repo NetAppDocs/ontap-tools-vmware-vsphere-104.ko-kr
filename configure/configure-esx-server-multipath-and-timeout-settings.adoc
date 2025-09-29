@@ -1,0 +1,104 @@
+---
+permalink: configure/configure-esx-server-multipath-and-timeout-settings.html 
+sidebar: sidebar 
+keywords:  
+summary: ONTAP tools for VMware vSphere NetApp 스토리지 시스템에서 가장 잘 작동하는 ESXi 호스트 다중 경로 설정과 HBA 시간 초과 설정을 확인하고 설정합니다. 
+---
+= ESXi 호스트 설정 구성
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ESXi 서버의 다중 경로 및 시간 초과 설정을 구성하면 기본 경로에 장애가 발생할 경우 백업 스토리지 경로로 원활하게 전환할 수 있어 높은 가용성과 데이터 무결성이 보장됩니다.
+
+
+
+== ESXi 서버 다중 경로 및 시간 초과 설정 구성
+
+ONTAP tools for VMware vSphere NetApp 스토리지 시스템에서 가장 잘 작동하는 ESXi 호스트 다중 경로 설정과 HBA 시간 초과 설정을 확인하고 설정합니다.
+
+*이 작업에 관하여*
+
+구성 및 시스템 부하에 따라 이 프로세스는 오랜 시간이 걸릴 수 있습니다.  작업 진행 상황은 최근 작업 패널에 표시됩니다.
+
+.단계
+. VMware vSphere Web 클라이언트 홈페이지에서 *호스트 및 클러스터*를 선택합니다.
+. 호스트를 마우스 오른쪽 버튼으로 클릭하고 * NetApp ONTAP 도구* > *호스트 데이터 업데이트*를 선택합니다.
+. VMware vSphere Web 클라이언트의 바로가기 페이지에서 플러그인 섹션 아래에 있는 * NetApp ONTAP 도구*를 선택합니다.
+. ONTAP tools for VMware vSphere 의 개요(대시보드)에서 *ESXi 호스트 규정 준수* 카드로 이동합니다.
+. *권장 설정 적용* 링크를 선택합니다.
+. *권장 호스트 설정 적용* 창에서 NetApp 권장 설정을 준수하도록 업데이트할 호스트를 선택하고 *다음*을 선택합니다.
++
+
+NOTE: ESXi 호스트를 확장하여 현재 값을 확인할 수 있습니다.
+
+. 설정 페이지에서 필요에 따라 권장되는 값을 선택하세요.
+. 요약 창에서 값을 확인하고 *마침*을 선택합니다.  최근 작업 패널에서 진행 상황을 추적할 수 있습니다.
+
+
+
+
+== ESXi 호스트 값 설정
+
+ONTAP tools for VMware vSphere 사용하면 ESXi 호스트에서 시간 초과 및 기타 값을 설정하여 최상의 성능과 성공적인 장애 조치를 보장할 수 있습니다.  ONTAP tools for VMware vSphere 설정하는 값은 NetApp 내부 테스트를 기반으로 합니다.
+
+ESXi 호스트에서 다음 값을 설정할 수 있습니다.
+
+
+
+=== HBA/CNA 어댑터 설정
+
+다음 매개변수를 기본값으로 설정합니다.
+
+* 디스크.QFullSampleSize
+* 디스크.QFullThreshold
+* Emulex FC HBA 타임아웃
+* QLogic FC HBA 시간 초과
+
+
+
+
+=== MPIO 설정
+
+MPIO 설정은 NetApp 스토리지 시스템의 기본 경로를 정의합니다.  이들은 사용 가능한 경로 중 어떤 것이 최적화된지(인터커넥트 케이블을 통과하는 최적화되지 않은 경로와 대조적으로)를 결정하고 해당 경로 중 하나를 기본 경로로 설정합니다.
+
+고성능 환경이나 단일 LUN 데이터 저장소로 성능을 테스트하는 경우 라운드 로빈(VMW_PSP_RR) 경로 선택 정책(PSP)의 부하 분산 설정을 기본 IOPS 설정인 1000에서 값 1로 변경하는 것을 고려하세요.
+
+
+NOTE: MPIO 설정은 NVMe, NVMe/FC 및 NVMe/TCP 프로토콜에는 적용되지 않습니다.
+
+
+
+=== NFS 설정
+
+|===
+
+
+| 매개변수 | 이 값을 다음과 같이 설정합니다... 
+
+
+| Net.TcpipHeapSize | 32 
+
+
+| Net.TcpipHeapMax | 1024MB 
+
+
+| NFS.최대 볼륨 | 256 
+
+
+| NFS41.MaxVolumes | 256 
+
+
+| NFS.MaxQueueDepth | 128 이상 
+
+
+| NFS.HeartbeatMaxFailures | 10 
+
+
+| NFS.하트비트 빈도 | 12 
+
+
+| NFS.하트비트타임아웃 | 5 
+|===

@@ -1,0 +1,40 @@
+---
+permalink: manage/uninstall-deployment.html 
+sidebar: sidebar 
+keywords: ONTAP tools,Storage Replication Adapter 
+summary: 이 섹션의 지침에 따라 ONTAP tools for VMware vSphere 정상적으로 종료하세요. 
+---
+= ONTAP tools for VMware vSphere 제거
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP tools for VMware vSphere 제거하면 도구의 모든 데이터가 삭제됩니다.
+
+.단계
+. ONTAP tools for VMware vSphere 에서 모든 가상 머신을 제거하거나 이동합니다.
++
+** 가상 머신을 제거하려면 다음을 참조하세요. https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/8-0/vsphere-virtual-machine-administration-guide-8-0/managing-virtual-machinesvsphere-vm-admin/adding-and-removing-virtual-machinesvsphere-vm-admin.html#GUID-376174FE-F936-4BE4-B8C2-48EED42F110B-en["VM 및 VM 템플릿 제거 및 재등록"]
+** 관리되지 않는 데이터 저장소로 이동하려면 다음을 참조하세요. https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/9-0/migrate-a-virtual-machine-with-storage-vmotion.html["Storage vMotion을 사용하여 가상 머신을 마이그레이션하는 방법"]
+
+
+. link:../manage/delete-ds.html["데이터 저장소 삭제"]ONTAP tools for VMware vSphere 에서 생성되었습니다.
+. VASA 공급자를 활성화한 경우 ONTAP 도구에서 *설정* > *VASA 공급자 설정* > *등록 취소*를 선택하여 모든 vCenter 서버에서 VASA 공급자를 등록 취소합니다.
+. vCenter Server 인스턴스에서 모든 스토리지 백엔드를 연결 해제합니다. link:../manage/manage-vcenter.html["vCenter Server 인스턴스와 스토리지 백엔드 연결 해제"] .
+. 모든 스토리지 백엔드를 삭제합니다. link:../manage/storage-backend.html["스토리지 백엔드 관리"] .
+. VMware Live Site Recovery에서 SRA 어댑터를 제거합니다.
++
+.. 포트 5480을 사용하여 VMware Live Site Recovery 어플라이언스 관리 인터페이스에 관리자로 로그인합니다.
+.. *저장소 복제 어댑터*를 선택합니다.
+.. 적절한 SRA 카드를 선택하고 드롭다운 메뉴에서 *삭제*를 선택합니다.
+.. 어댑터 삭제 결과를 확인하고 *삭제*를 선택하세요.
+
+
+. ONTAP tools for VMware vSphere 에 온보딩된 vCenter 서버 인스턴스를 삭제합니다. link:../manage/manage-vcenter.html["vCenter Server 인스턴스 관리"] .
+. vCenter Server에서 ONTAP tools for VMware vSphere 전원을 끄고 VM을 삭제합니다.
+
+
+.다음은 무엇인가요?
+link:../manage/delete-deployment.html["FlexVol 볼륨 제거"]

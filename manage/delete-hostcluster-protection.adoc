@@ -1,0 +1,22 @@
+---
+permalink: manage/delete-hostcluster-protection.html 
+sidebar: sidebar 
+keywords: vVols datastore,delete vVol 
+summary: 호스트 클러스터 보호를 제거하면 데이터 저장소가 보호되지 않습니다. 
+---
+= 호스트 클러스터 보호 제거
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+호스트 클러스터 보호를 제거하면 데이터 저장소가 보호되지 않습니다.
+
+.단계
+. 보호된 호스트 클러스터를 보려면 * NetApp ONTAP 도구* > *보호* > *호스트 클러스터 관계*로 이동합니다.
++
+이 페이지에서는 보호된 호스트 클러스터와 해당 보호 상태, SnapMirror 관계 및 해당 SnapMirror 상태를 모니터링할 수 있습니다.
+
+. *호스트 클러스터 보호* 창에서 클러스터에 대한 줄임표 메뉴를 선택한 다음 *보호 제거*를 선택합니다.
+

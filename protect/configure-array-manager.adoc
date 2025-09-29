@@ -1,0 +1,62 @@
+---
+permalink: protect/configure-array-manager.html 
+sidebar: sidebar 
+keywords:  
+summary: 'VMware Live Site Recovery의 Array Manager 마법사를 사용하여 스토리지 복제 어댑터(SRA)를 구성하면 VMware Live Site Recovery와 스토리지 가상 머신(SVM) 간의 상호 작용을 활성화할 수 있습니다.' 
+---
+= 어레이 관리자를 사용하여 SRA 구성
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+VMware Live Site Recovery의 Array Manager 마법사를 사용하여 SRA(스토리지 복제 어댑터)를 구성하면 VMware Live Site Recovery와 스토리지 가상 머신(SVM) 간의 상호 작용을 활성화할 수 있습니다.
+
+.시작하기 전에
+* VMware Live Site Recovery에서 보호 사이트와 복구 사이트를 페어링해야 합니다.
+* 어레이 관리자를 구성하기 전에 온보딩된 스토리지를 구성해야 합니다.
+* 보호된 사이트와 복구 사이트 간의 SnapMirror 관계를 구성하고 복제했어야 합니다.
+* 다중 테넌시를 활성화하려면 SVM 관리 LIF를 활성화해야 합니다.
+
+
+SRA는 클러스터 수준 관리와 SVM 수준 관리를 지원합니다.  클러스터 수준에서 스토리지를 추가하면 클러스터의 모든 SVM을 검색하고 작업을 수행할 수 있습니다.  SVM 수준에서 스토리지를 추가하면 해당 SVM만 관리할 수 있습니다.
+
+.단계
+. VMware Live Site Recovery에서 *어레이 관리자* > *어레이 관리자 추가*를 선택합니다.
+. VMware Live Site Recovery에서 어레이를 설명하려면 다음 정보를 입력하세요.
++
+.. *표시 이름* 필드에 배열 관리자를 식별할 이름을 입력합니다.
+.. *SRA 유형* 필드에서 * ONTAP 용 NetApp 스토리지 복제 어댑터*를 선택합니다.
+.. 클러스터 또는 SVM에 연결하기 위한 정보를 입력하세요.
++
+*** 클러스터에 연결하는 경우 클러스터 관리 LIF를 입력해야 합니다.
+*** SVM에 직접 연결하는 경우 SVM 관리 LIF의 IP 주소를 입력해야 합니다.
++
+
+NOTE: 어레이 관리자를 구성할 때 ONTAP tools for VMware vSphere 에서 스토리지 시스템을 온보딩하는 데 사용된 것과 동일한 연결(IP 주소)을 스토리지 시스템에 사용해야 합니다.  예를 들어, 어레이 관리자 구성이 SVM 범위인 경우 ONTAP tools for VMware vSphere 의 스토리지는 SVM 수준에서 추가되어야 합니다.
+
+
+
+.. 클러스터에 연결하는 경우 *SVM 이름* 필드에 SVM 이름을 지정하거나 비워 두면 클러스터의 모든 SVM을 관리합니다.
+.. *볼륨 포함 목록* 필드에 검색할 볼륨을 입력합니다.
++
+보호된 사이트에서 소스 볼륨을 입력하고 복구 사이트에서 복제된 대상 볼륨을 입력할 수 있습니다.
+
++
+예를 들어, SnapMirror 관계에 있는 볼륨 src_vol1을 볼륨 dst_vol1과 검색하려면 보호 사이트 필드에 src_vol1을 지정하고 복구 사이트 필드에 dst_vol1을 지정해야 합니다.
+
+.. *(선택 사항)* 볼륨 제외 목록 필드에 검색에서 제외할 볼륨을 입력합니다.
++
+보호된 사이트에서 소스 볼륨을 입력하고 복구 사이트에서 복제된 대상 볼륨을 입력할 수 있습니다.
+
++
+예를 들어 SnapMirror 관계에 있는 볼륨 _src_vol1_을 볼륨 _dst_vol1_과 제외하려면 보호 사이트 필드에 _src_vol1_을 지정하고 복구 사이트 필드에 _dst_vol1_을 지정해야 합니다.
+
+
+
+. *다음*을 선택하세요.
+. 배열이 검색되어 배열 관리자 추가 창 하단에 표시되는지 확인하고 *마침*을 선택합니다.
+
+
+적절한 SVM 관리 IP 주소와 자격 증명을 사용하여 복구 사이트에도 동일한 단계를 따를 수 있습니다.  배열 관리자 추가 마법사의 배열 쌍 활성화 화면에서 올바른 배열 쌍이 선택되었는지, 그리고 활성화할 준비가 되었는지 확인해야 합니다.

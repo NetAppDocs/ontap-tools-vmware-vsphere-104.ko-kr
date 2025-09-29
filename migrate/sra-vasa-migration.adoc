@@ -1,0 +1,176 @@
+---
+permalink: migrate/sra-vasa-migration.html 
+sidebar: sidebar 
+keywords: migrate 
+summary: 스토리지 데이터를 마이그레이션할 때 스토리지 백엔드는 REST API를 사용하여 수동으로 온보딩됩니다.  VASA 공급자 데이터를 마이그레이션할 때 데이터는 기존 Derby 데이터베이스에서 내보내지고 MongoDB 데이터베이스로 가져옵니다. 
+---
+= VASA 공급자를 마이그레이션하고 SRA를 업데이트합니다.
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+
+
+== VASA 공급자를 마이그레이션하는 단계
+
+. ONTAP tools for VMware vSphere 에서 Derby PORT 1527을 활성화하려면 루트 사용자를 활성화하고 SSH를 통해 CLI에 로그인합니다.  그런 다음 다음 명령을 실행합니다.
++
+[listing]
+----
+iptables -I INPUT 1 -p tcp --dport 1527 -j ACCEPT
+----
+. ONTAP tools for VMware vSphere 배포합니다.
+. ONTAP tools for VMware vSphere 로 마이그레이션하려는 vCenter Server 인스턴스를 추가합니다. . link:../configure/add-vcenter.html["vCenter Server 인스턴스 추가"] 자세한 내용은.
+. ONTAP 도구 플러그인을 위한 vCenter 서버 API에서 로컬로 스토리지 백엔드를 온보딩합니다.
+. Swagger 또는 Postman에서 다음 API를 실행하여 마이그레이션합니다.
++
+curl -X POST  `\https://xx.xx.xx.xx:8443/virtualization/api/v1/vcenters/{vcguid}/migration-jobs``
+
++
+다음 URL을 통해 Swagger에 액세스할 수 있습니다.  `\https://$FQDN_IP_PORT/', for example: `\https://10.67.25.33:8443` .
+
++
+[]
+====
+*HTTP 메서드 및 엔드포인트*
+
+이 REST API 호출은 다음 메서드와 엔드포인트를 사용합니다.
+
+|===
+
+
+| *HTTP 방식* | *길* 
+
+
+| 우편 | /api/v1 
+|===
+*처리 유형*
+
+비동기
+
+*컬 예시*
+
+curl -X POST'https://<OTV-NG-IP>:8443/virtualization/api/v1/vcenters/<vcguid>/migration-jobs'[] \ --header 'x-auth: <인증 토큰>' \ --header '콘텐츠 유형: application/json' \ --data '{ "otv_ip": "xx.xx.xx.xx", "vasa_provider_credentials": { "username": "xxxxx", "password": "******" }, "database_password": "******" }'
+
+다른 릴리스 마이그레이션에 대한 요청 본문:
+
+{ "otv_ip": "xx.xx.xx.xx", "vasa_provider_credentials": { "사용자 이름": "xxxxx", "비밀번호": "*******" } }
+
+*JSON 출력 예시*
+
+작업 객체가 반환됩니다.  다음 단계에서 사용하려면 작업 식별자를 저장해야 합니다.
+
+{ "id": 123, "migration_id": "d50073ce-35b4-4c51-9d2e-4ce66f802c35", "status": "실행 중" }
+
+====
+. Swagger에서 다음 URI를 사용하여 상태를 확인하세요.
++
+[listing]
+----
+curl `\https://xx.xx.xx.xxx:8443/virtualization/api/jobmanager/v2/jobs/<JobID>?includeSubJobsAndTasks=true`
+----
++
+작업을 완료한 후 마이그레이션 보고서를 검토하세요.  이 보고서는 작업 데이터에 포함되어 있으며 작업 응답에서 접근할 수 있습니다.
+
+. vCenter Server에 ONTAP tools for VMware vSphere 추가link:../configure/registration-process.html["VASA 공급자 등록"] ONTAP tools for VMware vSphere 사용.
+. link:../manage/enable-services.html["VASA 공급자 활성화"]ONTAP tools for VMware vSphere 서비스.
+. 유지 관리 콘솔에서 ONTAP tools for VMware vSphere 중지합니다.
++
+VASA 공급자를 삭제하지 마세요.
+
++
+이전 VASA Provider가 중지되면 vCenter Server는 ONTAP tools for VMware vSphere 로 장애 조치됩니다. 모든 데이터스토어와 VM에 액세스할 수 있게 되고 ONTAP tools for VMware vSphere 에서 서비스를 제공합니다.
+
+. ONTAP tools for VMware vSphere 에서 마이그레이션된 NFS 및 VMFS 데이터 저장소는 데이터 저장소 검색 작업이 트리거된 후에만 ONTAP tools for VMware vSphere 에 표시되며, 완료하는 데 최대 30분이 걸릴 수 있습니다.  VMware vSphere 플러그인 사용자 인터페이스 페이지의 ONTAP 도구 개요 페이지에 데이터 저장소가 표시되는지 확인하세요.
+. Swagger 또는 Postman에서 다음 API를 사용하여 패치 마이그레이션을 수행합니다.
++
+[]
+====
+*HTTP 메서드 및 엔드포인트*
+
+이 REST API 호출은 다음 메서드와 엔드포인트를 사용합니다.
+
+|===
+
+
+| *HTTP 방식* | *길* 
+
+
+| 반점 | /api/v1 
+|===
+*처리 유형*
+
+비동기
+
+*컬 예시*
+
+curl -X 패치  `\https://xx.xx.xx.xx:8443/virtualization/api/v1/vcenters/56d373bd-4163-44f9-a872-9adabb008ca9/migration-jobs/84dr73bd-9173-65r7-w345-8ufdbb887d43`
+
+*JSON 출력 예시*
+
+작업 객체가 반환됩니다.  다음 단계에서 사용하려면 작업 식별자를 저장해야 합니다.
+
+{ "id": 123, "migration_id": "d50073ce-35b4-4c51-9d2e-4ce66f802c35", "status": "실행 중" }
+
+패치 작업을 위한 요청 본문이 비어 있습니다.
+
+
+NOTE: UUID는 마이그레이션 후 API에 대한 응답으로 반환된 마이그레이션 UUID입니다.
+
+패치 마이그레이션 API를 실행한 후 모든 VM이 스토리지 정책을 준수합니다.
+
+====
+
+
+.다음은 무엇입니까?
+마이그레이션을 완료하고 ONTAP 도구 10.4를 vCenter Server에 등록한 후 다음 단계를 따르세요.
+
+* *검색*이 완료될 때까지 기다리면 모든 호스트에서 인증서가 자동으로 새로 고쳐집니다.
+* 데이터스토어 및 가상 머신 작업을 시작하기 전에 충분한 시간을 두십시오. 필요한 대기 시간은 구성 내 호스트, 데이터스토어 및 가상 머신 수에 따라 다릅니다. 대기하지 않으면 간헐적인 운영 장애가 발생할 수 있습니다.
+
+
+업그레이드 후 가상 머신의 규정 준수 상태가 오래된 경우 다음 단계에 따라 스토리지 정책을 다시 적용하세요.
+
+. 데이터 저장소로 이동하여 *요약* > *VM 스토리지 정책*을 선택합니다.
++
+*VM 스토리지 정책 준수* 아래의 준수 상태가 *오래됨*으로 표시됩니다.
+
+. 저장소 VM 정책과 해당 VM을 선택하세요.
+. *적용*을 선택하세요
++
+*VM 스토리지 정책 준수*의 준수 상태가 이제 준수로 표시됩니다.
+
+
+
+.관련 정보
+* link:../concepts/rbac-learn-about.html["ONTAP tools for VMware vSphere 에 대해 알아보세요"]
+* link:../upgrade/upgrade-ontap-tools.html["ONTAP tools for VMware vSphere 에서 10.4로 업그레이드"]
+
+
+
+
+== 스토리지 복제 어댑터(SRA)를 업데이트하는 단계
+
+.시작하기 전에
+복구 계획에서 보호 사이트는 현재 VM이 실행 중인 위치를 나타내고, 복구 사이트는 VM이 복구될 위치를 나타냅니다. SRM 인터페이스는 보호 사이트와 복구 사이트에 대한 세부 정보와 함께 복구 계획의 상태를 표시합니다. 복구 계획에서 *CleanupP* 및 *Reprotect* 버튼은 비활성화되어 있지만, TEST 및 RUN 버튼은 활성화되어 있습니다. 이는 사이트가 데이터 복구를 위해 준비되었음을 나타냅니다. SRA를 마이그레이션하기 전에 한 사이트는 보호 상태이고 다른 사이트는 복구 상태인지 확인하십시오.
+
+
+NOTE: 장애 조치가 완료되었지만 재보호가 보류 중인 경우 마이그레이션을 시작하지 마세요. 마이그레이션을 진행하기 전에 재보호 프로세스가 완료되었는지 확인하세요. 테스트 장애 조치가 진행 중인 경우 테스트 장애 조치를 정리하고 마이그레이션을 시작합니다.
+
+. VMware Site Recovery에서 VMware vSphere 9.xx용 ONTAP 도구 SRA 어댑터를 삭제하려면 다음 단계를 따르세요.
++
+.. VMware Live Site Recovery 구성 관리 페이지로 이동
+.. *저장소 복제 어댑터* 섹션으로 이동합니다.
+.. 줄임표 메뉴에서 *구성 재설정*을 선택합니다.
+.. 줄임표 메뉴에서 *삭제*를 선택합니다.
+
+
+. 보호 사이트와 복구 사이트 모두에서 이 단계를 수행합니다.
++
+.. link:../manage/enable-services.html["ONTAP tools for VMware vSphere 활성화"]
+.. 다음 단계를 사용하여 ONTAP tools for VMware vSphere 설치합니다.link:../protect/configure-on-srm-appliance.html["VMware Live Site Recovery 어플라이언스에서 SRA 구성"] .
+.. VMware Live Site Recovery 사용자 인터페이스 페이지에서 *어레이 검색* 및 *장치 검색* 작업을 수행하고 마이그레이션 전과 같이 장치가 표시되는지 확인합니다.
+
+
+

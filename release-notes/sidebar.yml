@@ -1,0 +1,10 @@
+---
+section: release-notes
+title: 릴리스 노트
+entries:
+- title: 릴리스 노트
+  url: "/release-notes/release-notes.html"
+- title: ONTAP tools for VMware vSphere 의 새로운 기능
+  url: "/release-notes/whats-new.html"
+- title: ONTAP 도구 9와 ONTAP 도구 10 기능 비교
+  url: "/release-notes/ontap-tools-9-ontap-tools-10-feature-comparison.html"

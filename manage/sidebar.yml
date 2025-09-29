@@ -1,0 +1,100 @@
+---
+section: manage
+title: ONTAP tools for VMware vSphere 관리
+entries:
+- title: ONTAP tools for VMware vSphere
+  url: "/configure/dashboard-overview.html"
+- title: ONTAP 도구 관리자 사용자 인터페이스
+  url: "/configure/manager-user-interface.html"
+- title: igroups 및 내보내기 정책 이해
+  url: "/manage/igroup-workflow.html"
+- title: ONTAP 도구 관리 igroups 이해
+  url: "/manage/nested-igroups.html"
+- title: ONTAP tools for VMware vSphere 활성화
+  url: "/manage/enable-services.html"
+- title: ONTAP tools for VMware vSphere 변경
+  url: "/manage/edit-appliance-settings.html"
+- title: 데이터 저장소 관리
+  entries:
+  - title: NFS 및 VMFS 데이터 저장소 마운트
+    url: "/manage/mount-datastores-on-host.html"
+  - title: NFS 및 VMFS 데이터 저장소 마운트 해제
+    url: "/manage/unmount-datastores-on-host.html"
+  - title: vVols 데이터 저장소 마운트
+    url: "/manage/mount-a-vvols-datastore.html"
+  - title: NFS 및 VMFS 데이터 저장소 크기 조정
+    url: "/manage/resize-datastores.html"
+  - title: vVol 데이터 저장소 확장
+    url: "/manage/expand-storage-of-vvol-datastore.html"
+  - title: vVols 데이터 저장소 축소
+    url: "/manage/remove-storage-from-a-vvols-datastore.html"
+  - title: 데이터 저장소 삭제
+    url: "/manage/delete-ds.html"
+  - title: 데이터 저장소에 대한 ONTAP 스토리지 뷰
+    url: "/manage/storage-view-datastore.html"
+  - title: 가상 머신 스토리지 보기
+    url: "/manage/virtual-machine-storage-view-datastore.html"
+- title: 저장 임계값 관리
+  url: "/manage/manage-storage-threshold.html"
+- title: 스토리지 백엔드 관리
+  url: "/manage/storage-backend.html"
+- title: vCenter Server 인스턴스 관리
+  url: "/manage/manage-vcenter.html"
+- title: 인증서 관리
+  url: "/manage/certificate-manage.html"
+- title: ONTAP tools for VMware vSphere 에 액세스하세요
+  entries:
+  - title: ONTAP tools for VMware vSphere 개요
+    url: "/manage/maintenance-console.html"
+  - title: 원격 진단 액세스 구성
+    url: "/manage/configure-remote-diagnostic-access.html"
+  - title: 다른 노드에서 SSH 시작
+    url: "/manage/start-the-ssh-on-other-nodes.html"
+  - title: vCenter 서버 및 ONTAP 자격 증명 업데이트
+    url: "/manage/update-vcenter-credentials.html"
+- title: ONTAP 도구 보고서
+  url: "/manage/reports.html"
+- title: 로그 파일을 수집합니다
+  url: "/manage/collect-the-log-files.html"
+- title: 가상 머신 관리
+  entries:
+  - title: 가상 머신을 마이그레이션하거나 복제할 때의 고려 사항
+    url: "/manage/migrate-virtual-machines.html"
+  - title: NFS 및 VMFS 데이터 저장소가 있는 가상 머신을 vVols 데이터 저장소로 마이그레이션
+    url: "/manage/migrate-standard-virtual-machines-to-vvols-datastores.html"
+  - title: VASA 정리
+    url: "/manage/delete-virtual-machines.html"
+  - title: 가상 머신에서 데이터 디스크를 연결하거나 분리합니다.
+    url: "/manage/attach-detach-disk.html"
+- title: 스토리지 시스템 및 호스트 검색
+  url: "/configure/discover-storage-systems-and-hosts.html"
+- title: ESXi 호스트 설정 수정
+  url: "/manage/edit-esxi-host-settings.html"
+- title: 비밀번호 관리
+  entries:
+  - title: ONTAP 도구 관리자 비밀번호 변경
+    url: "/manage/change-manager-password.html"
+  - title: ONTAP 도구 관리자 비밀번호 재설정
+    url: "/manage/reset-manager-password.html"
+  - title: 애플리케이션 사용자 비밀번호 재설정
+    url: "/manage/reset-app-password.html"
+  - title: 유지 관리 콘솔 사용자 비밀번호 재설정
+    url: "/manage/reset-maint-password.html"
+- title: 호스트 클러스터 보호 관리
+  entries:
+  - title: 호스트 클러스터 보호 수정
+    url: "/manage/edit-hostcluster-protection.html"
+  - title: 호스트 클러스터 보호 제거
+    url: "/manage/delete-hostcluster-protection.html"
+- title: AutoSupport 비활성화
+  url: "/manage/disable-autosupport.html"
+- title: AutoSupport 프록시 URL 업데이트
+  url: "/manage/update-proxyurl.html"
+- title: NTP 서버 추가
+  url: "/manage/add-ntpserver.html"
+- title: 백업을 생성하고 ONTAP 도구 설정을 복구합니다.
+  url: "/manage/enable-backup.html"
+- title: ONTAP tools for VMware vSphere 제거
+  url: "/manage/uninstall-deployment.html"
+- title: FlexVol 볼륨 제거
+  url: "/manage/delete-deployment.html"

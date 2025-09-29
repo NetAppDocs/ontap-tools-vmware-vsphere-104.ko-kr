@@ -1,0 +1,28 @@
+---
+permalink: manage/migrate-standard-virtual-machines-to-vvols-datastores.html 
+sidebar: sidebar 
+keywords: Migrate NFS and VMFS virtual machines 
+summary: 'NFS 및 VMFS 데이터 저장소에서 가상 머신을 Virtual Volumes (vVols) 데이터 저장소로 마이그레이션하여 정책 기반 VM 관리 및 기타 vVols 기능을 활용할 수 있습니다. vVols 데이터 저장소를 사용하면 증가된 워크로드 요구 사항을 충족할 수 있습니다.' 
+---
+= NFS 및 VMFS 데이터 저장소가 있는 가상 머신을 vVols 데이터 저장소로 마이그레이션
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+NFS 및 VMFS 데이터 저장소에서 가상 머신을 가상 볼륨(vVols) 데이터 저장소로 마이그레이션하여 정책 기반 VM 관리 및 기타 vVols 기능을 활용할 수 있습니다. vVols 데이터 저장소를 사용하면 증가된 워크로드 요구 사항을 충족할 수 있습니다.
+
+.시작하기 전에
+마이그레이션하려는 가상 머신에서 VASA Provider가 실행되고 있지 않은지 확인하세요.  VASA Provider를 실행하는 가상 머신을 vVols 데이터 저장소로 마이그레이션하는 경우 vVols 데이터 저장소에 있는 가상 머신의 전원을 켜는 것을 포함하여 모든 관리 작업을 수행할 수 없습니다.
+
+*이 작업에 관하여*
+
+NFS 및 VMFS 데이터스토어에서 vVols 데이터스토어로 마이그레이션하는 경우 vCenter Server는 VMFS 데이터스토어에서 데이터를 이동할 때 VAAI(vStorage APIs for Array Integration) 오프로드를 사용하지만 NFS VMDK 파일에서는 사용하지 않습니다.  VAAI 오프로드는 일반적으로 호스트의 부하를 줄입니다.
+
+.단계
+. 마이그레이션하려는 가상 머신을 마우스 오른쪽 버튼으로 클릭하고 *마이그레이션*을 선택합니다.
+. *저장 공간만 변경*을 선택한 후 *다음*을 선택합니다.
+. 마이그레이션하는 데이터스토어의 기능과 일치하는 가상 디스크 형식, VM 스토리지 정책 및 vVol 데이터스토어를 선택합니다.
+. 설정을 검토하고 *마침*을 선택합니다.
+

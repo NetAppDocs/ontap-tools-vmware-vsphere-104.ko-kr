@@ -1,0 +1,25 @@
+---
+permalink: manage/expand-storage-of-vvol-datastore.html 
+sidebar: sidebar 
+keywords: virtual volume datastores 
+summary: vCenter 개체 보기에서 데이터스토어 개체를 마우스 오른쪽 버튼으로 클릭하면 ONTAP tools for VMware vSphere 플러그인 섹션 아래에 표시됩니다. 
+---
+= vVols 데이터 저장소 확장
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+vCenter 개체 보기에서 데이터스토어 개체를 마우스 오른쪽 버튼으로 클릭하면 ONTAP tools for VMware vSphere 플러그인 섹션 아래에 표시됩니다.  특정 작업은 데이터 저장소 유형과 현재 사용자 권한에 따라 활성화됩니다.
+
+
+NOTE: vVols 데이터 저장소 확장 작업은 ASA r2 시스템 기반 vVols 데이터 저장소에는 적용되지 않습니다.
+
+.단계
+. vSphere Client 홈페이지에서 *호스트 및 클러스터*를 선택합니다.
+. 탐색 창에서 데이터 저장소가 포함된 데이터 센터를 선택합니다.
+. 데이터 저장소를 마우스 오른쪽 버튼으로 클릭하고 * NetApp ONTAP 도구* > *데이터 저장소에 스토리지 추가*를 선택합니다.
+. *볼륨 생성 또는 선택* 창에서 새 볼륨을 생성하거나 기존 볼륨에서 선택할 수 있습니다.  사용자 인터페이스는 설명이 필요 없을 정도로 명확합니다.  귀하의 선택에 따라 지침을 따르세요.
+. *요약* 창에서 선택 사항을 검토하고 *확장*을 선택합니다. 최근 작업 패널에서 진행 상황을 추적할 수 있습니다.
+

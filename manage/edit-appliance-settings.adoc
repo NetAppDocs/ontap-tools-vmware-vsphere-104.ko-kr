@@ -1,0 +1,64 @@
+---
+permalink: manage/edit-appliance-settings.html 
+sidebar: sidebar 
+keywords:  
+summary: ONTAP 도구 관리자를 사용하여 관리자 비밀번호를 변경할 수 있습니다. 
+---
+= ONTAP tools for VMware vSphere 변경
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP 도구 관리자를 사용하여 ONTAP tools for VMware vSphere 확장하여 배포에서 노드 수를 늘리거나 구성을 고가용성(HA) 설정으로 변경합니다.  ONTAP tools for VMware vSphere 처음에는 단일 노드 비 HA 구성으로 배포됩니다.
+
+
+NOTE: 비HA 백업이 활성화된 경우 HA로 마이그레이션하려면 먼저 백업을 비활성화한 다음 마이그레이션 후 다시 활성화하세요.
+
+.시작하기 전에
+* OVA 템플릿의 OVA 버전이 노드 1과 동일한지 확인하세요.  노드 1은 ONTAP tools for VMware vSphere 처음 배포되는 기본 노드입니다.
+* CPU 핫 애드와 메모리 핫 플러그가 활성화되어 있는지 확인하세요.
+* vCenter Server에서 재해 복구 서비스(DRS) 자동화 수준을 부분 자동화로 설정합니다.  HA를 배포한 후 완전 자동화로 되돌립니다.
+* HA 설정의 노드 호스트 이름은 소문자여야 합니다.
+
+
+.단계
+. 웹 브라우저에서 ONTAP 도구 관리자를 실행합니다. `\https://<ONTAPtoolsIP>:8443/virtualization/ui/`
+. 배포 중에 제공한 ONTAP tools for VMware vSphere 로 로그인합니다.
+. 개요 섹션에서 *기기 설정 편집*을 선택하세요.
+. *구성* 섹션에서는 요구 사항에 따라 노드 크기를 늘리고 HA 구성을 활성화할 수 있습니다.  변경하려면 vCenter Server 자격 증명이 필요합니다.
++
+ONTAP 도구가 HA 구성에 있는 경우 콘텐츠 라이브러리 세부 정보를 변경할 수 있습니다.  새로운 편집 내용을 제출할 때는 비밀번호를 다시 입력해야 합니다.
+
++
+
+NOTE: ONTAP tools for VMware vSphere 에서는 노드 크기를 늘릴 수만 있고, 노드 크기를 줄일 수는 없습니다. HA가 아닌 설정에서는 중간 크기 구성만 지원됩니다. HA 설정에서는 중간 및 대규모 구성이 지원됩니다.
+
+. HA 토글 버튼을 사용하여 HA 구성을 활성화합니다.  *HA 설정* 페이지에서 다음 사항을 확인하세요.
++
+** 콘텐츠 라이브러리는 ONTAP 도구 노드 VM이 실행되는 동일한 vCenter Server에 속합니다. vCenter Server 자격 증명은 어플라이언스 변경 사항에 대한 OVA 템플릿의 유효성을 검사하고 다운로드하는 데 사용됩니다.
+** ONTAP 도구를 호스팅하는 가상 머신은 ESXi 호스트에 직접 배포되지 않습니다.  VM은 클러스터나 리소스 풀에 배포되어야 합니다.
++
+
+NOTE: HA 구성이 활성화된 후에는 HA가 아닌 단일 노드 구성으로 되돌릴 수 없습니다.
+
+
+
+. *어플라이언스 설정 편집* 창의 *HA 설정* 섹션에서 노드 2와 3의 세부 정보를 입력할 수 있습니다.  ONTAP tools for VMware vSphere HA 설정에서 세 개의 노드를 지원합니다.
++
+
+NOTE: 대부분의 입력 옵션에는 작업 흐름을 편리하게 하기 위해 노드 1 네트워크 세부 정보가 미리 입력되어 있습니다. 하지만 마법사의 마지막 페이지로 이동하기 전에 입력 데이터를 편집할 수 있습니다. 첫 번째 노드에서 IPv6 주소가 활성화된 경우에만 다른 두 노드에 대한 IPv6 주소 세부 정보를 입력할 수 있습니다.
+
++
+ESXi 호스트에 ONTAP 도구 VM이 하나만 있는지 확인하세요.  다음 창으로 넘어갈 때마다 입력 내용이 검증됩니다.
+
+. *요약* 섹션에서 세부 정보를 검토하고 변경 사항을 *저장*합니다.
+
+
+.다음은 무엇인가요?
+*개요* 페이지는 배포 상태를 보여줍니다.  작업 ID를 사용하면 작업 보기에서 편집 기기 설정 작업 상태를 추적할 수도 있습니다.
+
+HA 배포에 실패하고 새 노드의 상태가 '신규'로 표시되는 경우 HA 활성화 작업을 다시 시도하기 전에 vCenter에서 새 VM을 삭제하세요.
+
+왼쪽 패널의 *알림* 탭에는 ONTAP tools for VMware vSphere 에 대한 알림이 나열됩니다.

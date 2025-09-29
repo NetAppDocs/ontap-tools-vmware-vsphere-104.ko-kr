@@ -1,0 +1,48 @@
+---
+permalink: configure/manager-user-interface.html 
+sidebar: sidebar 
+keywords: ontap tools manager, managerui 
+summary: ONTAP 도구 관리자는 ONTAP tools for VMware vSphere 에 대한 더 많은 제어권과 기능을 제공하여 어플라이언스, 테넌트 및 스토리지 백엔드의 전반적인 관리에 도움이 됩니다. 
+---
+= ONTAP 도구 관리자 사용자 인터페이스
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP tools for VMware vSphere 여러 vCenter Server 인스턴스를 관리할 수 있는 멀티 테넌트 시스템입니다.  ONTAP 도구 관리자는 관리되는 vCenter Server 인스턴스와 온보딩된 스토리지 백엔드에 대한 ONTAP tools for VMware vSphere 에 대한 더 많은 제어 기능을 제공합니다.
+
+ONTAP 도구 관리자는 다음과 같은 데 도움이 됩니다.
+
+* vCenter Server 인스턴스 관리 - ONTAP 도구에 vCenter Server 인스턴스를 추가하고 관리합니다.
+* 스토리지 백엔드 관리 - ONTAP tools for VMware vSphere 에 ONTAP 스토리지 클러스터를 추가하고 관리하고 이를 전역적으로 온보딩된 vCenter Server 인스턴스에 매핑합니다.
+* 로그 번들 다운로드 - ONTAP tools for VMware vSphere 에 대한 로그 파일을 수집합니다.
+* 인증서 관리 - 자체 서명된 인증서를 사용자 정의 CA 인증서로 변경하고 VASA Provider 및 ONTAP 도구의 모든 인증서를 갱신하거나 새로 고칩니다.
+* 비밀번호 관리 - 사용자의 OVA 애플리케이션 비밀번호를 재설정합니다.
+
+
+ONTAP 도구 관리자에 액세스하려면 다음을 실행하세요. `\https://<ONTAPtoolsIP>:8443/virtualization/ui/` 브라우저에서 ONTAP tools for VMware vSphere 로그인합니다.
+
+ONTAP 도구 관리자 개요 섹션은 서비스 관리, 노드 크기 확장, 고가용성(HA) 활성화 등의 어플라이언스 구성을 관리하는 데 도움이 됩니다.  또한 노드와 관련된 ONTAP 도구의 전반적인 정보(상태, 네트워크 세부 정보, 알림 등)를 모니터링할 수 있습니다.
+
+image:../media/ontap-tools-manager-overview.png["ONTAP 도구 관리자 대시보드 개요"]
+
+|===
+| *카드* | *설명* 
+
+
+| 가전제품 카드 | 어플라이언스 카드는 ONTAP 도구 어플라이언스의 전반적인 상태를 제공합니다.  여기에는 기기 구성 세부 정보와 활성화된 서비스 상태가 표시됩니다.  ONTAP 도구 어플라이언스에 대한 추가 정보를 보려면 *세부 정보 보기* 링크를 선택하세요.  편집 기기 설정 작업 작업이 진행 중일 때, 기기 포틀릿에 작업의 상태와 세부 정보가 표시됩니다. 
+
+
+| 알림 카드 | 알림 카드에는 HA 노드 수준 알림을 포함하여 유형별로 ONTAP 도구 알림이 나열됩니다.  알림 목록을 보려면 개수 텍스트(하이퍼링크)를 선택하세요.  링크를 클릭하면 선택한 유형으로 필터링된 알림 보기 페이지로 이동합니다. 
+
+
+| vCenter | vCenter 카드는 시스템의 vCenter 상태를 보여줍니다. 
+
+
+| 스토리지 백엔드 | 스토리지 백엔드 카드는 시스템의 스토리지 백엔드 상태를 보여줍니다. 
+
+
+| ONTAP 도구 노드 카드 | ONTAP 도구 노드 카드는 노드 이름, 노드 VM 이름, 상태 및 모든 네트워크 관련 데이터가 포함된 노드 목록을 보여줍니다.  *세부정보 보기*를 선택하면 선택한 노드와 관련된 추가 세부정보를 볼 수 있습니다.  [참고] HA가 아닌 설정에서는 노드가 하나만 표시됩니다.  HA 설정에서는 세 개의 노드가 표시됩니다. 
+|===

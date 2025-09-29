@@ -1,0 +1,8 @@
+---
+section: upgrade
+title: ONTAP tools for VMware vSphere 업그레이드
+entries:
+- title: ONTAP tools for VMware vSphere 에서 10.4로 업그레이드
+  url: "/upgrade/upgrade-ontap-tools.html"
+- title: 업그레이드 오류 코드
+  url: "/upgrade/upgrade-error-codes.html"

@@ -1,0 +1,33 @@
+---
+permalink: configure/registration-process.html 
+sidebar: sidebar 
+keywords:  
+summary: ONTAP tools for VMware vSphere 사용하여 vCenter Server 인스턴스에 VASA 공급자를 등록할 수 있습니다. 
+---
+= vCenter Server 인스턴스에 VASA 공급자 등록
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP tools for VMware vSphere 사용하여 vCenter Server 인스턴스에 VASA 공급자를 등록할 수 있습니다.  VASA 공급자 설정 섹션에는 선택한 vCenter Server에 대한 VASA 공급자 등록 상태가 표시됩니다.  다중 vCenter 배포에서는 각 vCenter Server 인스턴스에 사용자 지정 CA 인증서가 있는지 확인하세요.
+
+.단계
+. vSphere 클라이언트에 로그인합니다.
+. 플러그인 섹션에서 *바로가기* > * NetApp ONTAP 도구*를 선택합니다.
+. *설정* > *VASA 공급자 설정*을 선택하세요. VASA 공급자 등록 상태가 등록되지 않음으로 표시됩니다.
+. VASA 공급자를 등록하려면 *등록* 버튼을 선택하세요.
+. VASA 공급자의 이름과 자격 증명을 입력하세요. 사용자 이름에는 문자, 숫자, 밑줄만 사용할 수 있습니다. 비밀번호 길이는 8자에서 256자 사이여야 합니다.
+. *등록*을 선택하세요.
+. 등록이 성공적으로 완료되고 페이지가 새로 고쳐지면 등록된 VASA 공급자의 상태, 이름, 버전이 표시됩니다.  등록 후 등록 취소 작업이 활성화됩니다.
+
+
+.다음은 무엇입니까?
+vCenter 클라이언트에서 온보딩된 VASA 공급자가 VASA 공급자 아래에 나열되어 있는지 확인하세요.
+
+.단계
+. vCenter Server 인스턴스로 이동합니다.
+. 관리자 자격 증명으로 로그인하세요.
+. *저장소 공급자* > *구성*을 선택합니다.  등록된 VASA 공급자가 올바르게 나열되어 있는지 확인하세요.
+

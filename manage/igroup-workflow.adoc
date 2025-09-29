@@ -1,0 +1,244 @@
+---
+permalink: manage/igroup-workflow.html 
+sidebar: sidebar 
+keywords:  
+summary:  
+---
+= ONTAP tools for VMware vSphere 에서 igroups 및 내보내기 정책 이해
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+이니시에이터 그룹(igroup)은 FC 프로토콜 호스트 WWPN(World Wide Port Name) 또는 iSCSI 호스트 정규 노드 이름의 테이블입니다.  igroup을 정의하고 LUN에 매핑하여 어떤 이니시에이터가 LUN에 액세스할 수 있는지 제어할 수 있습니다.
+
+ONTAP tools for VMware vSphere 에서 igroup은 플랫 구조로 생성 및 관리되었으며, vCenter의 각 데이터스토어는 단일 igroup과 연결되었습니다. 이 모델은 여러 데이터 저장소에서 igroup의 유연성과 재사용성을 제한했습니다. ONTAP tools for VMware vSphere 중첩된 igroup을 도입했습니다. 즉, vCenter의 각 데이터 저장소는 상위 igroup과 연결되고 각 호스트는 해당 상위 아래의 하위 igroup에 연결됩니다. 여러 데이터 저장소에서 재사용할 수 있도록 사용자 정의 이름으로 사용자 정의 상위 igroup을 정의하여 igroup을 보다 유연하고 상호 연결된 방식으로 관리할 수 있습니다. ONTAP tools for VMware vSphere 에서 LUN과 데이터 저장소를 효과적으로 관리하려면 igroup 워크플로를 이해하는 것이 필수적입니다. 다음 예에서 볼 수 있듯이 다양한 워크플로는 다양한 igroup 구성을 생성합니다.
+
+
+NOTE: 언급된 이름은 단지 설명을 위한 목적으로만 사용되었으며 실제 igroup 이름을 나타내는 것이 아닙니다. ONTAP 도구에서 관리하는 igroup은 접두사 "otv_"를 사용합니다. 사용자 정의 igroup에는 원하는 이름을 지정할 수 있습니다.
+
+|===
+
+
+| 용어 | 설명 
+
+
+| DS<숫자> | 데이터 저장소 
+
+
+| iqn<숫자> | 개시자 IQN 
+
+
+| 호스트<번호> | 호스트 MoRef 
+
+
+| lun<숫자> | LUN ID 
+
+
+| <DSName>Igroup<번호> | 기본(ONTAP 도구 관리) 상위 igroup 
+
+
+| <호스트-모어>I그룹<번호> | 어린이 i그룹 
+
+
+| CustomIgroup<숫자> | 사용자 정의 사용자 정의 부모 igroup 
+
+
+| 클래식I그룹<번호> | ONTAP 도구 9.x 버전에서 사용되는 igroup입니다. 
+|===
+.예 1:
+하나의 이니시에이터로 단일 호스트에 데이터 저장소를 생성합니다.
+
+*워크플로*: [생성] DS1(lun1): host1(iqn1)
+
+*결과*:
+
+* DS1I그룹:
++
+** host1Igroup → (iqn1: lun1)
+
+
+
+
+DS1에 대한 부모 igroup DS1Igroup이 ONTAP 시스템에 생성되고, lun1에 매핑된 자식 igroup host1Igroup이 생성됩니다.  LUN은 항상 자식 igroup에 매핑됩니다.
+
+.예 2:
+기존 데이터 저장소를 추가 호스트에 마운트합니다.
+
+*워크플로*: [마운트] DS1(lun1): host2(iqn2)
+
+*결과*:
+
+* DS1I그룹:
++
+** host1Igroup → (iqn1: lun1)
+** host2Igroup → (iqn2: lun1)
+
+
+
+
+자식 igroup host2Igroup이 생성되어 기존 부모 igroup DS1Igroup에 추가됩니다.
+
+.예 3:
+호스트에서 데이터스토어 마운트 해제
+
+*워크플로*: [마운트 해제] DS1(lun1): 호스트1(iqn1)
+
+*결과*:
+
+* DS1I그룹:
++
+** host2Igroup → (iqn2: lun1)
+
+
+
+
+host1Igroup이 계층 구조에서 제거됩니다. 자식 igroup은 명시적으로 삭제되지 않습니다. 삭제는 다음 두 가지 조건에서 발생합니다.
+
+* LUN이 매핑되지 않으면 ONTAP 시스템은 자식 igroup을 삭제합니다.
+* 예약된 정리 작업은 LUN 매핑이 없는 불안정한 자식 igroup을 제거합니다.  이러한 시나리오는 ONTAP 도구로 관리되는 igroup에만 적용되며, 사용자 정의로 생성된 igroup에는 적용되지 않습니다.
+
+
+.예시 4:
+데이터 저장소 삭제
+
+*워크플로*: [삭제] DS1(lun1): host2(iqn2)
+
+*결과*:
+
+* DS1I그룹:
++
+** host2Igroup → (iqn2: lun1)
+
+
+
+
+다른 데이터 저장소가 부모 igroup을 재사용하지 않으면 부모 및 자식 igroup이 제거됩니다. 자식 igroup은 명시적으로 삭제되지 않습니다.
+
+.예시 5:
+사용자 정의 부모 igroup 아래에 여러 데이터 저장소 만들기
+
+*작업 흐름*:
+
+* [생성] DS2(lun2): host1(iqn1), host2(iqn2)
+* [생성] DS3(lun3): host1(iqn1), host3(iqn3)
+
+
+*결과*:
+
+* 커스텀I그룹1:
++
+** host1Igroup → (iqn1: lun2, lun3)
+** host2Igroup → (iqn2: lun2)
+** host3Igroup → (iqn3: lun3)
+
+
+
+
+CustomIgroup1은 DS2용으로 생성되어 DS3에 재사용됩니다.  자식 igroup은 공유 부모 아래에 생성되거나 업데이트되며, 각 자식 igroup은 해당 LUN에 매핑됩니다.
+
+.예시 6:
+사용자 정의 상위 igroup 아래에 있는 하나의 데이터 저장소를 삭제합니다.
+
+*워크플로*: [삭제] DS2(lun2): host1(iqn1), host2(iqn2)
+
+*결과*:
+
+* 커스텀I그룹1:
++
+** host1Igroup → (iqn1: lun3)
+** host3Igroup → (iqn3: lun3)
+
+
+* CustomIgroup1은 재사용되지 않더라도 삭제되지 않습니다.
+* LUN이 매핑되지 않으면 ONTAP 시스템은 host2Igroup을 삭제합니다.
+* host1Igroup은 DS3의 lun3에 매핑되어 있으므로 삭제되지 않습니다. 사용자 지정 igroup은 재사용 상태와 관계없이 삭제되지 않습니다.
+
+
+.예시 7:
+vVols 데이터 저장소 확장(볼륨 추가)
+
+*작업 흐름*:
+
+확장 전:
+
+[확장] DS4(lun4): host4(iqn4)
+
+* DS4Igroup: host4Igroup → (iqn4: lun4)
+
+
+확장 후:
+
+[확장] DS4(lun4, lun5): host4(iqn4)
+
+* DS4Igroup: host4Igroup → (iqn4: lun4, lun5)
+
+
+새로운 LUN이 생성되어 기존 자식 igroup host4Igroup에 매핑됩니다.
+
+.예시 8:
+vVols 데이터 저장소 축소(볼륨 제거)
+
+*작업 흐름*:
+
+수축 전:
+
+[축소] DS4(lun4, lun5): host4(iqn4)
+
+* DS4Igroup: host4Igroup → (iqn4: lun4, lun5)
+
+
+수축 후:
+
+[축소] DS4(lun4): host4(iqn4)
+
+* DS4Igroup: host4Igroup → (iqn4: lun4)
+
+
+지정된 LUN(lun5)이 자식 igroup에서 매핑 해제됩니다.  igroup은 최소한 하나의 매핑된 LUN이 있는 한 활성 상태를 유지합니다.
+
+.예시 9:
+ONTAP 도구 9에서 10으로 마이그레이션(igroup 정규화)
+
+*작업 흐름*
+
+VMware vSphere 9.x 버전용 ONTAP 도구는 계층적 igroup을 지원하지 않습니다. 10.3 이상 버전으로 마이그레이션하는 동안 igroup을 계층 구조로 정규화해야 합니다.
+
+이전 전:
+
+[마이그레이션] DS6(lun6, lun7): host6(iqn6), host7(iqn7) → ClassicIgroup1(iqn6 & iqn7 : lun6, lun7)
+
+ONTAP 도구 9.x 로직은 일대일 호스트 매핑을 적용하지 않고도 igroup당 여러 개의 이니시에이터를 허용합니다.
+
+마이그레이션 후:
+
+[마이그레이션] DS6(lun6, lun7): host6(iqn6), host7(iqn7) → ClassicIgroup1: otv_ClassicIgroup1(iqn6 & iqn7: lun6, lun7)
+
+마이그레이션 중:
+
+* 새로운 상위 igroup(ClassicIgroup1)이 생성됩니다.
+* 원래 igroup은 otv_ 접두사로 이름이 바뀌고 자식 igroup이 됩니다.
+
+
+이를 통해 계층적 모델을 준수할 수 있습니다.
+
+.관련 주제
+https://docs.netapp.com/us-en/ontap/san-admin/igroups-concept.html["igroups에 대하여"]
+
+
+
+== 수출 정책
+
+내보내기 정책은 ONTAP tools for VMware vSphere 에서 NFS 데이터 저장소에 대한 액세스를 제어합니다.  이들은 어떤 클라이언트가 데이터 저장소에 접근할 수 있는지, 그리고 어떤 권한을 가지고 있는지 정의합니다.  내보내기 정책은 ONTAP 시스템에서 생성 및 관리되며 NFS 데이터 저장소와 연결하여 액세스 제어를 시행할 수 있습니다.  각 내보내기 정책은 액세스가 허용되는 클라이언트(IP 주소 또는 서브넷)와 부여되는 권한(읽기 전용 또는 읽기-쓰기)을 지정하는 규칙으로 구성됩니다.
+
+ONTAP tools for VMware vSphere 에서 NFS 데이터 저장소를 생성할 때 기존 내보내기 정책을 선택하거나 새 정책을 생성할 수 있습니다.  그런 다음 내보내기 정책이 데이터 저장소에 적용되어 권한이 있는 클라이언트만 액세스할 수 있도록 합니다.
+
+새로운 ESXi 호스트에 NFS 데이터스토어를 마운트하면 ONTAP tools for VMware vSphere 호스트의 IP 주소를 데이터스토어와 연결된 기존 내보내기 정책에 추가합니다.  이를 통해 새로운 호스트는 새로운 내보내기 정책을 생성하지 않고도 데이터 저장소에 액세스할 수 있습니다.
+
+ESXi 호스트에서 NFS 데이터스토어를 삭제하거나 마운트 해제하면 ONTAP tools for VMware vSphere 내보내기 정책에서 호스트의 IP 주소를 제거합니다.  다른 호스트가 해당 내보내기 정책을 사용하지 않으면 해당 정책은 삭제됩니다.  NFS 데이터 저장소를 삭제하면 ONTAP tools for VMware vSphere 다른 데이터 저장소에서 재사용되지 않는 경우 해당 데이터 저장소와 연결된 내보내기 정책을 제거합니다.  내보내기 정책을 재사용하면 호스트 IP 주소가 유지되고 변경되지 않습니다.  데이터 저장소를 삭제하면 내보내기 정책은 호스트 IP 주소를 할당 해제하고 기본 내보내기 정책을 할당하여 필요한 경우 ONTAP 시스템이 해당 IP 주소에 액세스할 수 있도록 합니다.
+
+여러 데이터스토어에서 재사용되는 내보내기 정책 할당 방식은 다릅니다. 내보내기 정책을 재사용할 경우 새 호스트 IP 주소를 정책에 추가할 수 있습니다. 공유 내보내기 정책을 사용하는 데이터스토어를 삭제하거나 마운트 해제해도 정책은 삭제되지 않습니다. 정책은 변경되지 않고 호스트 IP 주소도 제거되지 않습니다. 다른 데이터스토어와 공유되기 때문입니다. 내보내기 정책을 재사용하면 액세스 및 지연 시간 문제가 발생할 수 있으므로 권장하지 않습니다.
+
+.관련 주제
+https://docs.netapp.com/us-en/ontap/nfs-config/create-export-policy-task.html["수출 정책 만들기"]

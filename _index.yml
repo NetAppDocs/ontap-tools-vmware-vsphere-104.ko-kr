@@ -1,0 +1,38 @@
+---
+indexpage:
+  title: ONTAP tools for VMware vSphere
+  lead: ONTAP tools for VMware vSphere 사용하면 vCenter Server 환경에서 가상 데이터스토어를 구성, 관리
+    및 보호할 수 있습니다.
+  tiles:
+  - title: 시작하기
+    links:
+    - title: 릴리스 노트
+      url: https://library.netapp.com/ecm/ecm_download_file/ECMLP3343864
+    - title: ONTAP tools for VMware vSphere 에 대해 알아보세요
+      url: "/concepts/ontap-tools-overview.html"
+    - title: ONTAP tools for VMware vSphere 배포
+      url: "/deploy/ontap-tools-deployment.html"
+    - title: ONTAP tools for VMware vSphere 의 최신 릴리스로 업그레이드
+      url: "/upgrade/upgrade-ontap-tools.html"
+    - title: ONTAP tools for VMware vSphere 마이그레이션
+      url: migrate/migrate-to-latest-ontaptools.html
+  - title: ONTAP tools for VMware vSphere 사용
+    links:
+    - title: 역할 기반 액세스 제어 구성
+      url: "/concepts/rbac-learn-about.html"
+    - title: 원격 진단 구성
+      url: "/manage/configure-remote-diagnostic-access.html"
+    - title: ONTAP tools for VMware vSphere 의 고가용성
+      url: "/concepts/high-availability.html"
+    - title: 데이터 저장소를 보호하세요
+      url: "/protect/enable-storage-replication-adapter.html"
+  - title: 더 많은 리소스
+    links:
+    - title: ONTAP tools for VMware vSphere 의 이전 버전에 대한 설명서
+      url: https://mysupport.netapp.com/documentation/productlibrary/index.html?productID=63792
+    - title: NetApp 지식 기반 - ONTAP tools for VMware vSphere
+      url: https://kb.netapp.com/data-mgmt/OTV
+    - title: NetApp 커뮤니티 - ONTAP tools for VMware vSphere
+      url: https://community.netapp.com/t5/VMware-Solutions-Discussions/bd-p/vmware-solutions-discussions
+    - title: ONTAP 사용한 VMware vSphere에 대해 알아보세요
+      url: https://docs.netapp.com/us-en/ontap-apps-dbs/vmware/vmware-vsphere-overview.html#why-ontap-for-vsphere

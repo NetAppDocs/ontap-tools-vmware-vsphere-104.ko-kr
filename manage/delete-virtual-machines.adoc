@@ -1,0 +1,24 @@
+---
+permalink: manage/delete-virtual-machines.html 
+sidebar: sidebar 
+keywords:  
+summary: 이 섹션의 단계에 따라 VASA 정리를 수행하세요. 
+---
+= VASA 정리
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+이 섹션의 단계에 따라 VASA 정리를 수행하세요.
+
+
+NOTE: VASA 정리를 수행하기 전에 모든 vVols 데이터 저장소를 제거하는 것이 좋습니다.
+
+.단계
+. \ https://OTV_IP:8143/Register.html 로 이동하여 플러그인 등록을 취소하세요.
+. vCenter Server에서 해당 플러그인을 더 이상 사용할 수 없는지 확인하세요.
+. ONTAP tools for VMware vSphere 종료합니다.
+. ONTAP tools for VMware vSphere 삭제합니다.
+

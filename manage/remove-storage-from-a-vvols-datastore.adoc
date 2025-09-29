@@ -1,0 +1,29 @@
+---
+permalink: manage/remove-storage-from-a-vvols-datastore.html 
+sidebar: sidebar 
+keywords: Remove vVol datastore 
+summary: 데이터 저장소 삭제 작업은 선택한 데이터 저장소에 vVols 없는 경우 데이터 저장소를 삭제합니다. 
+---
+= vVols 데이터 저장소 축소
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+데이터 저장소 삭제 작업은 선택한 데이터 저장소에 vVols 없는 경우 데이터 저장소를 삭제합니다.
+
+
+NOTE: ASA r2 시스템 기반 vVols 데이터 저장소에서는 vVols 데이터 저장소 축소 작업이 지원되지 않습니다.
+
+.단계
+. vSphere Client 홈페이지에서 *호스트 및 클러스터*를 선택합니다.
+. 탐색 창에서 데이터 저장소가 포함된 데이터 센터를 선택합니다.
+. vVol 데이터 저장소를 마우스 오른쪽 버튼으로 클릭하고 * NetApp ONTAP 도구* > *데이터 저장소에서 저장소 제거*를 선택합니다.
+. vVols 없는 볼륨을 선택하고 *제거*를 선택합니다.
++
+
+NOTE: vVols 가 상주하는 볼륨을 선택하는 옵션이 비활성화되었습니다.
+
+. *저장소 제거* 팝업에서 * ONTAP 클러스터에서 볼륨 삭제* 확인란을 선택하여 데이터 저장소와 ONTAP 저장소에서 볼륨을 삭제하고 *삭제*를 선택합니다.
+

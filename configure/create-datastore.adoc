@@ -1,0 +1,183 @@
+---
+permalink: configure/create-datastore.html 
+sidebar: sidebar 
+keywords:  
+summary: 호스트 클러스터 수준에서 데이터 저장소를 생성하면 대상의 모든 호스트에 데이터 저장소가 생성되어 마운트되고, 현재 사용자에게 실행 권한이 있는 경우에만 작업이 활성화됩니다. 
+---
+= 데이터 저장소 만들기
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+호스트 클러스터 수준에서 데이터 저장소를 생성하면 대상의 모든 호스트에 데이터 저장소가 생성되어 마운트되고, 현재 사용자에게 실행 권한이 있는 경우에만 작업이 활성화됩니다.
+
+*vCenter Server 및 ONTAP 도구로 관리되는 데이터스토어와 기본 데이터스토어 간 상호 운용성*
+
+ONTAP tools for VMware vSphere 데이터스토어에 대한 중첩된 igroup을 생성하며, 부모 igroup은 데이터스토어에 특정하고 자식 igroup은 호스트에 매핑됩니다.  ONTAP 시스템 관리자에서 플랫 igroup을 만들고 ONTAP 도구를 사용하지 않고도 이를 사용하여 VMFS 데이터 저장소를 만들 수 있습니다. 참조하다 https://docs.netapp.com/us-en/ontap/san-admin/manage-san-initiators-task.html["SAN 이니시에이터 및 igroup 관리"] 자세한 내용은.
+
+스토리지가 ONTAP 도구에 온보딩되고 데이터 저장소 검색이 실행되면 플랫 igroup과 VMFS 데이터 저장소가 ONTAP 도구에서 관리되고 중첩된 igroup으로 변환됩니다.  이전의 플랫 igroup을 사용하여 새로운 데이터 저장소를 생성할 수 없습니다. 중첩된 igroup을 재사용하려면 ONTAP 도구 사용자 인터페이스나 REST API를 사용해야 합니다.
+
+[role="tabbed-block"]
+====
+.vVols 데이터 저장소 만들기
+--
+ONTAP tools for VMware vSphere 부터 ASA r2 시스템에 thin.vVol이라는 공간 효율성을 갖춘 vVols 데이터 저장소를 생성할 수 있습니다. VASA 공급자는 vVol 데이터 저장소를 생성하는 동안 컨테이너와 원하는 프로토콜 엔드포인트를 생성합니다. 이 컨테이너에는 백업 볼륨이 없습니다.
+
+.시작하기 전에
+* 루트 집계가 SVM에 매핑되지 않았는지 확인하세요.
+* 선택한 vCenter에 VASA 공급자가 등록되어 있는지 확인하세요.
+* ASA r2 스토리지 시스템에서는 SVM이 SVM 사용자에 대한 집계에 매핑되어야 합니다.
+
+
+.단계
+. vSphere 클라이언트에 로그인합니다.
+. 호스트 시스템, 호스트 클러스터 또는 데이터 센터를 마우스 오른쪽 버튼으로 클릭하고 * NetApp ONTAP 도구* > *데이터 저장소 만들기*를 선택합니다.
+. vVols *데이터 저장소 유형*을 선택합니다.
+. *데이터 저장소 이름*과 *프로토콜* 정보를 입력하세요.
++
+
+NOTE: ASA r2 시스템은 vVols 대한 iSCSI 및 FC 프로토콜을 지원합니다.
+
+. 데이터스토어를 생성할 스토리지 VM을 선택하세요.
+. 고급 옵션:
++
+** *사용자 지정 내보내기 정책*을 선택하는 경우 모든 개체에 대해 vCenter에서 검색을 실행해야 합니다. 이 옵션은 사용하지 않는 것이 좋습니다.
+** iSCSI 및 FC 프로토콜에 대해 *사용자 지정 이니시에이터 그룹* 이름을 선택할 수 있습니다.
++
+
+NOTE: ASA r2 스토리지 시스템 유형 SVM에서는 데이터 저장소가 논리적 컨테이너일 뿐이므로 스토리지 단위(LUN/네임스페이스)가 생성되지 않습니다.
+
+
+
+. *저장소 속성* 창에서 새 볼륨을 만들거나 기존 볼륨을 사용할 수 있습니다.  하지만 이 두 유형의 볼륨을 결합하여 vVols 데이터 저장소를 만들 수는 없습니다.
++
+새 볼륨을 생성할 때 데이터 저장소에서 QoS를 활성화할 수 있습니다. 기본적으로 LUN 생성 요청마다 볼륨이 하나씩 생성됩니다. 이 단계는 ASA r2 스토리지 시스템을 사용하는 vVols 데이터 저장소에는 적용되지 않습니다.
+
+. *요약* 창에서 선택 사항을 검토하고 *마침*을 선택하세요.
+
+
+--
+.NFS 데이터 저장소 만들기
+--
+VMware 네트워크 파일 시스템(NFS) 데이터 저장소는 NFS 프로토콜을 사용하여 네트워크를 통해 ESXi 호스트를 공유 스토리지 장치에 연결합니다.  NFS 데이터 저장소는 일반적으로 VMware vSphere 환경에서 사용되며 단순성, 유연성 등 여러 가지 이점을 제공합니다.
+
+.단계
+. vSphere 클라이언트에 로그인합니다.
+. 호스트 시스템, 호스트 클러스터 또는 데이터 센터를 마우스 오른쪽 버튼으로 클릭하고 * NetApp ONTAP 도구* > *데이터 저장소 만들기*를 선택합니다.
+. *데이터 저장소 유형* 필드에서 NFS를 선택합니다.
+. *이름 및 프로토콜* 창에 데이터 저장소 이름, 크기 및 프로토콜 정보를 입력합니다.  고급 옵션에서 *데이터 저장소 클러스터*와 *Kerberos 인증*을 선택합니다.
++
+
+NOTE: Kerberos 인증은 NFS 4.1 프로토콜을 선택한 경우에만 사용할 수 있습니다.
+
+. *저장소* 창에서 *플랫폼*과 *저장소 VM*을 선택합니다.
+. 고급 옵션에서 *사용자 지정 내보내기 정책*을 선택하면 모든 개체에 대해 vCenter에서 검색을 실행합니다. 이 옵션은 사용하지 않는 것이 좋습니다.
++
+
+NOTE: SVM의 기본/루트 볼륨 정책을 사용하여 NFS 데이터 저장소를 만들 수 없습니다.
+
++
+** 고급 옵션에서 *비대칭* 토글 버튼은 플랫폼 드롭다운에서 성능이나 용량이 선택된 경우에만 표시됩니다.
+** 플랫폼 드롭다운에서 *모든* 옵션을 선택하면 플랫폼이나 비대칭 플래그에 관계없이 vCenter에 속한 SVM을 볼 수 있습니다.
+
+
+. *저장소 속성* 창에서 볼륨 생성을 위한 집계를 선택합니다.  고급 옵션에서 필요에 따라 *공간 예약* 및 *QoS 활성화*를 선택합니다.
+. *요약* 창에서 선택 내용을 검토하고 *마침*을 선택합니다.
+
+
+NFS 데이터 저장소가 생성되어 모든 호스트에 마운트됩니다.
+
+--
+.VMFS 데이터 저장소 만들기
+--
+VMFS(가상 머신 파일 시스템)는 VMware vSphere 환경에서 가상 머신 파일을 저장하는 클러스터형 파일 시스템입니다.  VMFS를 사용하면 여러 ESXi 호스트가 동일한 가상 머신 파일에 동시에 액세스할 수 있으므로 vMotion 및 고가용성과 같은 기능을 사용할 수 있습니다.
+
+보호된 클러스터에서:
+
+* VMFS 데이터 저장소만 생성할 수 있습니다.  보호된 클러스터에 VMFS 데이터 저장소를 추가하면 데이터 저장소가 자동으로 보호됩니다.
+* 하나 이상의 보호된 호스트 클러스터가 있는 데이터 센터에는 데이터 저장소를 만들 수 없습니다.
+* 부모 호스트 클러스터가 "자동화된 장애 조치 이중 정책" 유형(균일/비균일 구성) 관계로 보호되는 경우 ESXi 호스트에 데이터 저장소를 생성할 수 없습니다.
+* 비동기 관계로 보호되는 ESXi 호스트에만 VMFS 데이터 저장소를 만들 수 있습니다.  "자동화된 장애 조치 이중화" 정책으로 보호되는 호스트 클러스터의 일부인 ESXi 호스트에 데이터스토어를 만들고 마운트할 수 없습니다.
+
+
+.시작하기 전에
+* ONTAP 스토리지 측에서 각 프로토콜에 대한 서비스와 LIF를 활성화합니다.
+* ASA r2 스토리지 시스템의 SVM 사용자를 집계하기 위해 SVM을 매핑합니다.
+* NVMe/TCP 프로토콜을 사용하는 경우 ESXi 호스트를 구성합니다.
++
+.. 검토하다 https://www.vmware.com/resources/compatibility/detail.php?deviceCategory=san&productid=49677&releases_filter=589,578,518,508,448&deviceCategory=san&details=1&partner=399&Protocols=1&transportTypes=3&isSVA=0&page=1&display_interval=10&sortColumn=Partner&sortOrder=Asc["VMware 호환성 가이드"]
++
+
+NOTE: VMware vSphere 7.0 U3 이상 버전은 NVMe/TCP 프로토콜을 지원합니다.  하지만 VMware vSphere 8.0 이상 버전을 권장합니다.
+
+.. 네트워크 인터페이스 카드(NIC) 공급업체가 NVMe/TCP 프로토콜을 사용하는 ESXi NIC를 지원하는지 확인합니다.
+.. NIC 공급업체 사양에 따라 NVMe/TCP에 대한 ESXi NIC를 구성합니다.
+.. VMware vSphere 7 릴리스를 사용하는 경우 VMware 사이트의 지침을 따르세요. https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/7-0/vsphere-storage-7-0/about-vmware-nvme-storage/configure-adapters-for-nvme-over-tcp-storage/configure-vmkernel-binding-for-the-tcp-adapter.html["NVMe over TCP 어댑터에 대한 VMkernel 바인딩 구성"] NVMe/TCP 포트 바인딩을 구성합니다.  VMware vSphere 8 릴리스를 사용하는 경우 다음을 따르세요. https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/8-0/vsphere-storage-8-0/about-vmware-nvme-storage/configuring-nvme-over-tcp-on-esxi.html["ESXi에서 TCP를 통한 NVMe 구성"] NVMe/TCP 포트 바인딩을 구성합니다.
+.. VMware vSphere 7 릴리스의 경우 페이지의 지침을 따르세요. https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/7-0/vsphere-storage-7-0/about-vmware-nvme-storage/add-software-nvme-over-rdma-or-nvme-over-tcp-adapters.html["NVMe over RDMA 또는 NVMe over TCP 소프트웨어 어댑터 활성화"] NVMe/TCP 소프트웨어 어댑터를 구성합니다.  VMware vSphere 8 릴리스의 경우 다음을 따르세요. https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/8-0/vsphere-storage-8-0/about-vmware-nvme-storage/configuring-nvme-over-rdma-roce-v2-on-esxi/add-software-nvme-over-rdma-or-nvme-over-tcp-adapters.html["RDMA 또는 TCP 어댑터를 통한 NVMe 소프트웨어 추가"] NVMe/TCP 소프트웨어 어댑터를 구성합니다.
+.. 달리다link:../configure/discover-storage-systems-and-hosts.html["스토리지 시스템 및 호스트 검색"] ESXi 호스트에 대한 작업입니다. 자세한 내용은 다음을 참조하세요.  https://community.netapp.com/t5/Tech-ONTAP-Blogs/How-to-Configure-NVMe-TCP-with-vSphere-8-0-Update-1-and-ONTAP-9-13-1-for-VMFS/ba-p/445429["VMFS 데이터 저장소에 대해 vSphere 8.0 업데이트 1 및 ONTAP 9.13.1을 사용하여 NVMe/TCP를 구성하는 방법"] .
+
+
+* NVME/FC 프로토콜을 사용하는 경우 다음 단계를 수행하여 ESXi 호스트를 구성하세요.
++
+.. 아직 활성화되지 않았다면 ESXi 호스트에서 NVMe over Fabrics(NVMe-oF)를 활성화하세요.
+.. SCSI 구역화를 완료합니다.
+.. ESXi 호스트와 ONTAP 시스템이 물리적 및 논리적 계층에서 연결되어 있는지 확인하세요.
+
+
+
+
+FC 프로토콜에 대한 ONTAP SVM을 구성하려면 다음을 참조하세요. https://docs.netapp.com/us-en/ontap/san-admin/configure-svm-fc-task.html["FC에 대한 SVM 구성"] .
+
+VMware vSphere 8.0에서 NVMe/FC 프로토콜을 사용하는 방법에 대한 자세한 내용은 다음을 참조하세요. https://docs.netapp.com/us-en/ontap-sanhost/nvme_esxi_8.html["ONTAP 사용한 ESXi 8.x에 대한 NVMe-oF 호스트 구성"] .
+
+VMware vSphere 7.0에서 NVMe/FC를 사용하는 방법에 대한 자세한 내용은 다음을 참조하세요. https://docs.netapp.com/us-en/ontap-sanhost/nvme_esxi_8.html["ONTAP NVMe/FC 호스트 구성 가이드"] 그리고 http://www.netapp.com/us/media/tr-4684.pdf["TR-4684"] .
+
+.단계
+. vSphere 클라이언트에 로그인합니다.
+. 호스트 시스템, 호스트 클러스터 또는 데이터 센터를 마우스 오른쪽 버튼으로 클릭하고 * NetApp ONTAP 도구* > *데이터 저장소 만들기*를 선택합니다.
+. VMFS 데이터 저장소 유형을 선택하세요.
+. *이름 및 프로토콜* 창에 데이터 저장소 이름, 크기 및 프로토콜 정보를 입력합니다. 기존 VMFS 데이터 저장소 클러스터에 새 데이터 저장소를 추가하려면 고급 옵션에서 데이터 저장소 클러스터 선택기를 선택합니다.
+. *저장소* 창에서 저장소 VM을 선택합니다.  필요에 따라 *고급 옵션* 섹션에 *사용자 지정 개시자 그룹 이름*을 제공합니다.  데이터 저장소에 대해 기존 igroup을 선택하거나 사용자 정의 이름으로 새 igroup을 만들 수 있습니다.
++
+NVMe/FC 또는 NVMe/TCP 프로토콜을 선택하면 새로운 네임스페이스 하위 시스템이 생성되어 네임스페이스 매핑에 사용됩니다. 네임스페이스 하위 시스템은 데이터 저장소 이름을 포함하는 자동 생성된 이름을 사용하여 생성됩니다. *저장소* 창의 고급 옵션에 있는 *사용자 지정 네임스페이스 하위 시스템 이름* 필드에서 네임스페이스 하위 시스템의 이름을 바꿀 수 있습니다.
+
+. *저장소 속성* 창에서:
++
+.. 드롭다운 옵션에서 *집계*를 선택합니다.
++
+
+NOTE: ASA r2 스토리지 시스템의 경우, ASA r2 스토리지가 분산 스토리지이므로 *집계* 옵션이 표시되지 않습니다. ASA r2 스토리지 시스템 유형으로 SVM을 선택하면 스토리지 속성 페이지에 QoS 활성화 옵션이 표시됩니다.
+
+.. 선택한 프로토콜에 따라 씬 유형의 공간 예비를 갖춘 저장 장치(LUN/네임스페이스)가 생성됩니다.
++
+
+NOTE: ONTAP 9.16.1부터 ASA r2 스토리지 시스템은 클러스터당 최대 12개의 노드를 지원합니다.
+
+.. 이기종 클러스터인 12개 노드 SVM이 있는 ASA r2 스토리지 시스템에 대해 *성능 서비스 수준*을 선택합니다.  선택한 SVM이 동종 클러스터이거나 SVM 사용자를 사용하는 경우 이 옵션을 사용할 수 없습니다.
++
+'모든'은 기본 성능 서비스 수준(PSL) 값입니다.  이 설정은 ONTAP 균형 배치 알고리즘을 사용하여 저장 장치를 생성합니다.  하지만 필요에 따라 성능이나 익스트림 옵션을 선택할 수 있습니다.
+
+.. 필요에 따라 *기존 볼륨 사용*, *QoS 활성화* 옵션을 선택하고 세부 정보를 제공합니다.
++
+
+NOTE: ASA r2 스토리지 유형에서는 볼륨 생성 또는 선택이 스토리지 유닛 생성(LUN/네임스페이스)에 적용되지 않습니다.  따라서 이러한 옵션은 표시되지 않습니다.
+
++
+
+NOTE: 기존 볼륨을 사용하여 NVMe/FC 또는 NVMe/TCP 프로토콜을 사용하는 VMFS 데이터 저장소를 만들 수 없습니다. 새 볼륨을 만들어야 합니다.
+
+
+
+. *요약* 창에서 데이터 저장소 세부 정보를 검토하고 *마침*을 선택합니다.
+
+
+
+NOTE: 보호된 클러스터에 데이터 저장소를 생성하면 "데이터 저장소가 보호된 클러스터에 마운트되고 있습니다."라는 읽기 전용 메시지가 표시됩니다.
+
+.결과
+VMFS 데이터 저장소가 생성되어 모든 호스트에 마운트됩니다.
+
+--
+====

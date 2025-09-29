@@ -1,0 +1,31 @@
+---
+permalink: manage/enable-services.html 
+sidebar: sidebar 
+keywords:  
+summary: 'ONTAP 도구 관리자를 사용하여 관리자 비밀번호를 변경하면 ONTAP 도구 관리자를 사용하여 VASA 공급자, vVols 구성 가져오기, 재해 복구(SRA)와 같은 서비스를 활성화할 수 있습니다.' 
+---
+= ONTAP tools for VMware vSphere 활성화
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP 도구 관리자를 사용하여 관리자 비밀번호를 변경하면 ONTAP 도구 관리자를 사용하여 VASA 공급자, vVols 구성 가져오기, 재해 복구(SRA)와 같은 서비스를 활성화할 수 있습니다.
+
+.단계
+. 웹 브라우저에서 ONTAP 도구 관리자를 실행합니다. `\https://<ONTAPtoolsIP>:8443/virtualization/ui/`
+. 배포 중에 제공한 ONTAP tools for VMware vSphere 로 로그인합니다.
+. 개요 섹션에서 *기기 설정 편집*을 선택하세요.
+. *서비스* 섹션에서는 요구 사항에 따라 VASA 공급자, vVols 구성 가져오기, 재해 복구(SRA)와 같은 선택적 서비스를 활성화할 수 있습니다.
++
+처음으로 서비스를 활성화할 때 VASA 공급자 및 SRA 자격 증명을 만들어야 합니다.  이는 vCenter Server에서 VASA 공급자 및 SRA 서비스를 등록하거나 활성화하는 데 사용됩니다. 사용자 이름에는 문자, 숫자, 밑줄만 사용할 수 있습니다.  비밀번호 길이는 8자에서 256자 사이여야 합니다.
+
++
+
+NOTE: 선택적 서비스를 비활성화하기 전에 ONTAP 도구에서 관리하는 vCenter Server가 해당 서비스를 사용하지 않는지 확인하세요.
+
++
+* vVols 구성 가져오기 허용* 옵션은 VASA 공급자 서비스가 활성화된 경우에만 표시됩니다. 이 옵션을 사용하면 ONTAP 도구 9.xx에서 ONTAP 도구 10.4로 vVols 데이터를 마이그레이션할 수 있습니다.
+
+
