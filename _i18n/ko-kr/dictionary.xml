@@ -1055,58 +1055,16 @@
   <block id="e047b55bfbc6ebe2f16524db25c3d398" category="paragraph">상호 운용성 매트릭스 도구(IMT)에는 지원되는 ONTAP, vCenter Server, ESXi 호스트 및 플러그인 애플리케이션 버전에 대한 최신 정보가 포함되어 있습니다.</block>
   <block id="918d32b75f0ab883abba3a8dc0c3ae8d" category="inline-link">상호 운용성 매트릭스 도구</block>
   <block id="d9feb2b730ded2731ab499f4b64cca33" category="paragraph"><block ref="ccafd2400edf7c1aa273a76ad605940f" category="inline-link-rx"></block></block>
-  <block id="539fe4c7849ba8b90945fa7a65b43e41" category="paragraph">다음 표는 NetApp 에서 사용하는 네트워크 포트와 그 용도를 간략하게 설명합니다. 시스템 내에서 원활한 작동 및 통신을 위해 이러한 포트가 열려 있고 접근 가능한지 확인하십시오. 관련 서비스가 정상적으로 작동하려면 이러한 포트에서 트래픽을 허용하는 데 필요한 네트워크 구성이 제대로 되어 있는지 확인하십시오. 보안 정책에 따라 네트워크 내에서 이러한 트래픽을 허용하도록 방화벽이나 기타 보안 어플라이언스를 구성해야 할 수도 있습니다.</block>
   <block id="5ddcf17f54788a5bb9148e8671562c06" category="cell">*포트*</block>
   <block id="dce365633ffb688b7532470dfaf4e118" category="cell">*규약*</block>
-  <block id="0c95054981de037de06e544a52eb3613" category="cell">8143</block>
   <block id="b136ef5f6a01d816991fe3cf7a6ac763" category="cell">TCP</block>
-  <block id="a78ff8f5e1a40f03bf97db00bda0fb5f" category="cell">ONTAP 도구에 대한 HTTP/HTTPS 연결.</block>
-  <block id="5bd529d5b07b647a8863cf71e98d651a" category="cell">8043</block>
-  <block id="cb4b69eb9bd10da82c15dca2f86a1385" category="cell">9060</block>
   <block id="b6d767d2f8ed5d21a44b0e5886680cb9" category="cell">22</block>
-  <block id="07ac8d53698f067d7d278deb303748d3" category="cell">Ansible은 클러스터 프로비저닝 중 통신을 위해 이 SSH 포트를 사용합니다.  이 포트는 HA 구성의 경우 유지 관리 사용자 비밀번호, 상태 메시지를 변경하고 세 노드 모두의 값을 업데이트하는 등의 기능에 필요합니다.</block>
-  <block id="13f3cf8c531952d72e5847c4183e6910" category="cell">443</block>
-  <block id="9bb143d7a2036a80e106dc066c6b01f2" category="cell">이는 VASA 공급자 서비스에 대한 수신 통신을 위한 통과 포트입니다.  VASA 공급자 자체 서명 인증서와 사용자 정의 CA 인증서가 이 포트에 호스팅됩니다.</block>
-  <block id="7e6b20d014d1c659e4eaf20dc2dcd7eb" category="cell">8443</block>
-  <block id="05820e7e588ce97dc4656c92f1b83966" category="cell">이 포트는 swagger와 Manager 사용자 인터페이스 애플리케이션을 통해 API 문서를 호스팅합니다.</block>
-  <block id="add217938e07bb1fd8796e0315b88c10" category="cell">2379</block>
-  <block id="a5cc260611cf9a7ec571425794a59970" category="cell">이는 etcd 키 값 저장소에서 키를 가져오거나, 넣거나, 삭제하거나, 감시하는 것과 같은 클라이언트 요청에 대한 기본 포트입니다.</block>
-  <block id="da4902cb0bc38210839714ebdcf0efc3" category="cell">2380</block>
-  <block id="8251f4d10510ac6bdb1df6c86a270877" category="cell">이는 etcd가 데이터 복제 및 일관성을 위해 사용하는 Raft 합의 알고리즘에 사용되는 etcd 클러스터의 서버 간 통신을 위한 기본 포트입니다.</block>
-  <block id="e5e6851e7f7ffd3530e7389e183aa468" category="cell">7472</block>
   <block id="8962b8350728e2f6eb9cbbb07ca70d86" category="cell">TCP/UDP</block>
-  <block id="daf6d8a8d78132982e15d86e6c438d2c" category="cell">이것은 프로메테우스 메트릭 서비스 포트입니다.</block>
-  <block id="5d188b044333b4c62676e0d4f53dade7" category="cell">7946</block>
-  <block id="d0c5d9fb3af3553dbc8aa2d531b38b8f" category="cell">이 포트는 Docker의 컨테이너 네트워크 검색에 사용됩니다.</block>
-  <block id="a44ba9086b2b83ccf2baf7c678723449" category="cell">9083</block>
-  <block id="131790b08b90f216c8731a6e1a071001" category="cell">이 포트는 VASA Provider 서비스를 위한 내부적으로 사용되는 서비스 포트입니다.</block>
-  <block id="abea47ba24142ed16b7d8fbf2c740e0d" category="cell">1162</block>
   <block id="f5ef036b4d8b630721e51fe23489fbc9" category="cell">UDP</block>
-  <block id="ef2d924bd68e8697255e5349875213c7" category="cell">이것은 SNMP 트랩 패킷 포트입니다.</block>
   <block id="c03afab54002887e7e1d27a1069e206c" category="cell">6443</block>
-  <block id="344246837eb9cebeda0390f27595098a" category="cell">출처: RKE2 에이전트 노드.  대상: REK2 서버 노드.  설명: Kubernetes API</block>
   <block id="76444b3132fda0e2aca778051d776f1c" category="cell">9345</block>
-  <block id="d1666d7b518ad556f4c40bbdc50656d1" category="cell">출처: RKE2 에이전트 노드.  대상: REK2 서버 노드.  설명: REK2 관리자 API</block>
   <block id="6d1e481bdcf159961818823e652a7725" category="cell">8472</block>
-  <block id="a4b2529ef64aa741ab10320d0015b5fd" category="cell">TCP+UDP</block>
-  <block id="8133e71f09aebd3b7b7114054e3996be" category="cell">플란넬 VXLAN을 사용하는 경우 모든 노드는 UDP 포트 8472를 통해 다른 노드에 접속할 수 있어야 합니다.  출처: 모든 RKE2 노드.  대상지: 모든 REK2 노드.  설명: VXLAN을 사용한 Canal CNI</block>
-  <block id="183f50a7700982a3ed18ff6d7a5777bf" category="cell">10250</block>
-  <block id="26e6b756f989b3caa29f4476282eb8a7" category="cell">출처: 모든 RKE2 노드.  대상지: 모든 REK2 노드.  설명: Kubelet 메트릭</block>
-  <block id="84826728868f63de4eeb2f3b77cd762b" category="cell">30000-32767</block>
-  <block id="8954b42ae621d3a93011debf55edbeaf" category="cell">출처: 모든 RKE2 노드.  대상지: 모든 REK2 노드.  설명: NodePort 포트 범위</block>
   <block id="202cb962ac59075b964b07152d234b70" category="cell">123</block>
-  <block id="caf50900f166353ae4848c8c5ddf3383" category="cell">Ntpd는 이 포트를 사용하여 NTP 서버의 유효성 검사를 수행합니다.</block>
-  <block id="8c4743470c970199a9d1b885cf3df364" category="cell">137-139</block>
-  <block id="e68652501a313c2d1874782fb9aa6cc3" category="cell">SMB/Windows 공유 패킷.</block>
-  <block id="46d045ff5190f6ea93739da6c0aa19bc" category="cell">6789</block>
-  <block id="d64901cbc0ab46c670bc45c9b4a642a8" category="cell">세프 모니터(MON)</block>
-  <block id="63bfd6e8f26d1d3537f4c5038264ef36" category="cell">3300</block>
-  <block id="1a8c8d3ae7b0bbd9509b8905da9fa100" category="cell">6800-7300</block>
-  <block id="3e78b2f1a88a42db241d9a8ac8a6c679" category="cell">Ceph 관리자, OSD 및 파일 시스템(MDS).</block>
-  <block id="f033ab37c30201f73f142449d037028d" category="cell">80</block>
-  <block id="b1f7345122d52ddee0d7713bfad8b79b" category="cell">Ceph RADOS 게이트웨이(RGW)</block>
-  <block id="d82d678e9583c1f5f283ec56fbf1abb7" category="cell">9080</block>
-  <block id="4b32bee2eb6c3d05fc70a5fb2dffcb1c" category="cell">VP HTTP/HTTPS 연결(IPv4의 경우 127.0.0.0/8에서만 가능, IPv6의 경우 ::1/128에서만 가능).</block>
   <block id="5541521d8d465590f0919510f29154b2" category="section-title">ONTAP tools for VMware vSphere 배포를 위한 구성 제한</block>
   <block id="96c7de8d06430bb8621d9ca29f8bf76b" category="paragraph">다음 표를 가이드로 사용하여 ONTAP tools for VMware vSphere 구성할 수 있습니다.</block>
   <block id="4043f29990bf7ab4f6f8e863d6aaacfa" category="cell">*전개*</block>
@@ -2330,7 +2288,6 @@
   <block id="ef9e53e40d78d57abe78283a3603eb4e" category="list-text">*CD/DVD 드라이브* 필드 아래의 편집 설정 창에서 콘텐츠 라이브러리 ISO 파일을 선택합니다.</block>
   <block id="54a029420d74c0dff69239155cf510b5" category="inline-image-macro">설정 편집</block>
   <block id="2c2d3019834934bb25449edddc396321" category="list-text">ISO 파일을 선택하고 *확인*을 선택합니다.  *CD/DVD 드라이브* 필드에서 연결됨 확인란을 선택합니다.<block ref="af57a506b85774ef3a9f849e2b26e258" category="inline-image-macro-rx" type="image"></block></block>
-  <block id="17ed2c4d54e60ea5223b73996ed7aa1f" category="list-text">*3*을 입력하여 시스템 구성 메뉴를 선택합니다.</block>
   <block id="baab61a76fb8179e23cdeb844ecfde7e" category="list-text">업그레이드 옵션을 선택하려면 *7*을 입력하세요.</block>
   <block id="6aa61138e01e77bb590500715db216a4" category="list-text">업그레이드하면 다음 작업이 자동으로 수행됩니다.</block>
   <block id="3f50e7c6b4d426580688c6da56153793" category="list-text">인증서 업그레이드</block>
@@ -2411,4 +2368,69 @@
   <block id="240613f793edcc2e992729a70507371a" category="paragraph"><block ref="240613f793edcc2e992729a70507371a" category="inline-link-rx"></block></block>
   <block id="3904c99d9933639730b4d4478c649721" category="paragraph">HA가 아닌 업그레이드의 경우 ONTAP 도구 VM의 전원을 끄고, HA 업그레이드의 경우 가상 머신(VM) 설정에 다음과 같은 변경을 하기 전에 ONTAP 도구 관리 노드의 전원을 끕니다.</block>
   <block id="c79e7f78a612cfc75436e834b5708fae" category="list-text">HA가 아닌 업그레이드의 경우 ONTAP 도구 VM을 재부팅하여 변경 사항을 반영합니다. HA 업그레이드의 경우 ONTAP 도구 관리 노드를 재부팅하여 노드의 변경 사항을 반영합니다.</block>
+  <block id="d6200c71714f45121b9b19360cec0630" category="paragraph">다음 표는 NetApp 에서 사용하는 네트워크 포트와 그 용도를 간략하게 설명합니다. 포트에는 세 가지 유형이 있습니다.</block>
+  <block id="ffc9eeee8fddb03c01c7595ed7d9ef20" category="list-text">외부 포트: 이 포트는 Kubernetes 클러스터나 노드 외부에서 접근할 수 있습니다.  이를 통해 서비스가 외부 네트워크나 사용자와 통신할 수 있으므로 클러스터 환경 외부의 시스템과 통합이 가능합니다.</block>
+  <block id="594ed13b4371cfff54a163037f8027fd" category="list-text">노드 간 포트: 이 포트는 Kubernetes 클러스터 내의 노드 간 통신을 가능하게 합니다.  데이터 공유나 협력과 같은 클러스터 작업에 필요합니다.  단일 노드 배포의 경우 노드 간 포트는 노드 내부에서만 사용되며 외부 액세스가 필요하지 않습니다.  노드 간 포트는 클러스터 외부에서 트래픽을 허용할 수 있습니다.  방화벽 규칙을 사용하여 인터넷 접근에서 노드 간 포트를 차단합니다.</block>
+  <block id="a71b2f612491c16fd3ccd7aea87a39ce" category="list-text">내부 포트: 이 포트는 ClusterIP 주소를 사용하여 Kubernetes 클러스터 내에서 통신합니다.  이러한 항목은 외부에 노출되지 않으며 방화벽 규칙에 추가할 필요가 없습니다.</block>
+  <block id="40be5cc49cd5c75f73a6fb947ad09668" category="admonition">모든 ONTAP 도구 노드가 동일한 서브넷에 상주하여 서로 중단 없는 통신을 유지하도록 합니다.</block>
+  <block id="32b77a34ac580798094847606125ee3f" category="cell">*서비스/구성요소 이름*</block>
+  <block id="fb3301dd70508451098d3bf2e0f229dc" category="cell">*포트 유형*</block>
+  <block id="0fe9f736e781b8ae77a4dc265b308ebe" category="cell">ntv-게이트웨이-서비스(LB)</block>
+  <block id="225c8f048e5709c6d0264edeb227d6d2" category="cell">443, 8443</block>
+  <block id="b206a1b4ea1097761f78e8876f6da779" category="cell">외부</block>
+  <block id="ee06f8cf62ebebce2fc682c3c88efaca" category="cell">VASA 공급자 서비스에 대한 수신 통신을 위한 통과 포트입니다. VASA 공급자 자체 서명 인증서와 사용자 정의 CA 인증서가 이 포트에 호스팅됩니다.</block>
+  <block id="765553e6c7ac8592c389acb9878a050a" category="cell">SSH</block>
+  <block id="135064d8b8ef9153aa4d38ae8782828f" category="cell">원격 서버 로그인 및 명령 실행을 위한 Secure Shell입니다.</block>
+  <block id="0174928de3b4efea8b958f92bc41ae33" category="cell">rke2 서버</block>
+  <block id="3d8c374783a1bcc7fa61483357a4da6c" category="cell">노드 간</block>
+  <block id="dbb53621f59553f9a8624fa7abf760c6" category="cell">RKE2 감독자 API(신뢰할 수 있는 네트워크로 제한).</block>
+  <block id="6d61fe6aa1fb019df82898d5144703c6" category="cell">kube-apiserver</block>
+  <block id="cca9fc63e3115af1a58e5c1e6e0b7004" category="cell">Kubernetes API 서버 포트(신뢰할 수 있는 네트워크로 제한).</block>
+  <block id="c1eb43c159e761b5aa656b39c4a19c3c" category="cell">rpcbind/포트매퍼</block>
+  <block id="faacbda8079718ebf57507b9370a5cb8" category="cell">서비스 간 RPC 통신에 사용됩니다.</block>
+  <block id="06dc4c7a187ef5f93a26b76c544589d9" category="cell">코어드ns(DNS)</block>
+  <block id="d82c8d1619ad8176d665453cfb2e55f0" category="cell">53</block>
+  <block id="6b6bfb9422fcc063d87dad5518a22387" category="cell">클러스터 내에서 이름 확인을 위한 도메인 이름 시스템(DNS) 서비스입니다.</block>
+  <block id="5c54cb8f927a6c5a90622e1c7bd0bda5" category="cell">엔티피</block>
+  <block id="28cabd936fc9e4dd676e5a473c991a9d" category="cell">시간 동기화를 위한 네트워크 시간 프로토콜(NTP)</block>
+  <block id="a226e9fbdfc1c8dd7e7fef4d333f86ed" category="cell">등</block>
+  <block id="4c5fe472aba4c61b8035b29586909501" category="cell">2379, 2380, 2381</block>
+  <block id="ca1016fc257fb4f206daba9c2e97602e" category="cell">클러스터 데이터의 키-값 저장소입니다.</block>
+  <block id="0a753cc7c42ae02897ec5d952c6eeac3" category="cell">큐브-vip</block>
+  <block id="a29d1598024f9e87beab4b98411d48ce" category="cell">2112</block>
+  <block id="6fd0a8d83b6bfaef8466f1eba5737f28" category="cell">Kubernetes API 서버 포트.</block>
+  <block id="703e9c640b9e3ea630f6687938e43c9a" category="cell">쿠벨렛</block>
+  <block id="ef6964cc948c50c0cb0f8e9c8c67d0b8" category="cell">10248, 10250</block>
+  <block id="6bc1cc8e5f4a2a59b1b4e10039d894d7" category="cell">쿠버네티스 구성 요소</block>
+  <block id="5165268f7f73ee49d7f2962e7d3c2c4c" category="cell">kube-controller</block>
+  <block id="9578a63fbe545bd82cc5bbe749636af1" category="cell">10257</block>
+  <block id="859a378c2edcfab4acc9054bf56d3ad1" category="cell">클라우드 컨트롤러</block>
+  <block id="bd21307bad44dee908db2db5f6bf23c1" category="cell">10258</block>
+  <block id="81e0da1d45d48cb04172d7ca06e7effc" category="cell">kube-scheduler</block>
+  <block id="e44cf9762b402f5d8b5bc36f60304a15" category="cell">10259</block>
+  <block id="ea11065c99d9485fc7fe03aa1b668c20" category="cell">kube-proxy</block>
+  <block id="de5866a4d3536b773cd15b5e1e56bce8" category="cell">10249, 10256</block>
+  <block id="f4928ee7ea1ab0b3ae6cae5224c5cc14" category="cell">캘리코 마디</block>
+  <block id="0bb129af5c1fe13f217dc8c723b47ed6" category="cell">9091, 9099</block>
+  <block id="018630692c9be69155a82729a37de8d3" category="cell">Calico 네트워킹 구성 요소.</block>
+  <block id="34c54dce528ae11502f7c2908c0e4a21" category="cell">컨테이너</block>
+  <block id="a17479231dc298309a3fda7d7d00111a" category="cell">10010</block>
+  <block id="3c5a7d3a7abc9326167b18577df244e3" category="cell">컨테이너 데몬 서비스.</block>
+  <block id="d5cb5397b2f4727babe1417077f0cfd0" category="cell">VXLAN(플란넬)</block>
+  <block id="53dc538455257579c3d1a04ad3ee82a7" category="cell">포드 통신을 위한 오버레이 네트워크.</block>
+  <block id="491f9ca9a65625d41b7536f95a5829ee" category="admonition">HA 배포의 경우 모든 노드 간에 UDP 포트 8472가 열려 있는지 확인하세요.  이 포트는 노드 간 포드 간 통신을 가능하게 하며, 이를 차단하면 노드 간 네트워킹이 중단됩니다.</block>
+  <block id="622ebf1679f52188783e45799f3b70cb" category="summary">ONTAP tools for VMware vSphere 에 새로운 VMware vSphere 호스트를 추가합니다.</block>
+  <block id="5aa6adafd8167a23c389304a0d6e16cb" category="doc">새로운 VMware vSphere 호스트 추가</block>
+  <block id="a8626caa71cb3c13de333ded9fdfe5a8" category="paragraph">ONTAP tools for VMware vSphere 에 새로운 VMware vSphere 호스트를 추가하여 호스트의 데이터 저장소를 관리하고 보호합니다.</block>
+  <block id="020968a073f2c7584ecd5aaec97f88b0" category="inline-link">빠른 시작 워크플로를 사용하여 vSphere 클러스터에 ESX 호스트를 추가하는 방법</block>
+  <block id="0fdc03dfada440fcb45b31a6944bd23f" category="list-text">다음 페이지의 워크플로에 따라 VMware vSphere 클러스터에 호스트를 추가합니다.<block ref="cf7664c28a8bbe5a872742d0c68a4d4b" category="inline-link-rx"></block></block>
+  <block id="9764e14a69d1669b765a8ac58a35d864" category="list-text">호스트를 추가한 후 ONTAP 도구 메인 메뉴로 가서 개요 패널에서 *검색*을 선택합니다.  검색 프로세스가 완료될 때까지 기다리세요.  또는 예약된 호스트 검색이 완료될 때까지 기다릴 수 있습니다.</block>
+  <block id="c81c266dd6001708c9f3076ddf21214c" category="paragraph">이제 새로운 호스트는 ONTAP tools for VMware vSphere 에서 검색되고 관리됩니다.  새로운 호스트에서 데이터 저장소를 관리할 수 있습니다.</block>
+  <block id="11d81e4c78f6be23d5539c87f4f3a7a7" category="list-text"><block ref="c5978119f323c1ceb37571472aaae169" category="inline-link-macro-rx"></block>새로운 호스트에서.</block>
+  <block id="063680c82bcd7ffea25b1d4d5c3c6470" category="list-text"><block ref="b5251e50ffdcc6a83e84a63c2a1cd1e4" category="inline-link-macro-rx"></block>새로운 호스트에서.</block>
+  <block id="77320a87e6ca763456023daeede0729f" category="inline-link">vSphere 클러스터 워크플로에 ESX 호스트 추가</block>
+  <block id="91d42183cd7455cc3f88c0c77b61174e" category="admonition">다음을 사용하여 새 ESXi 호스트를 추가하는 경우<block ref="4954232b8967f3dbfaee01742ae35b89" category="inline-link-rx"></block> ONTAP 도구에 표시되기 전에 예약된 호스트 검색이 완료될 때까지 기다리세요.  또는 NetApp ONTAP 도구 개요 화면에서 수동으로 검색을 실행할 수 있습니다.</block>
+  <block id="83c2a6ded9467f8048f9a53cabd2e783" category="paragraph-title">관련 주제</block>
+  <block id="403e2c858b37daa43171ef37b71e6640" category="paragraph"><block ref="403e2c858b37daa43171ef37b71e6640" category="inline-link-macro-rx"></block></block>
+  <block id="17e484c8a86cb4a7c9192fe5d0393445" category="list-text">*2*을 입력하여 시스템 구성 메뉴를 선택합니다.</block>
 </blocks>

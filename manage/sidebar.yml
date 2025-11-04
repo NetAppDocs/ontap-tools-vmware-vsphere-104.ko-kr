@@ -14,6 +14,8 @@ entries:
   url: "/manage/enable-services.html"
 - title: ONTAP tools for VMware vSphere 변경
   url: "/manage/edit-appliance-settings.html"
+- title: 새로운 VMware vSphere 호스트 추가
+  url: "/manage/add-vsphere-host.html"
 - title: 데이터 저장소 관리
   entries:
   - title: NFS 및 VMFS 데이터 저장소 마운트

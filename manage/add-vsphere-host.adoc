@@ -1,0 +1,27 @@
+---
+permalink: manage/add-vsphere-host.html 
+sidebar: sidebar 
+keywords:  
+summary: ONTAP tools for VMware vSphere 에 새로운 VMware vSphere 호스트를 추가합니다. 
+---
+= 새로운 VMware vSphere 호스트 추가
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP tools for VMware vSphere 에 새로운 VMware vSphere 호스트를 추가하여 호스트의 데이터 저장소를 관리하고 보호합니다.
+
+.단계
+. 다음 페이지의 워크플로에 따라 VMware vSphere 클러스터에 호스트를 추가합니다. https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/9-0/use-quickstart-to-add---host-to-a-cluster.html["빠른 시작 워크플로를 사용하여 vSphere 클러스터에 ESX 호스트를 추가하는 방법"]
+. 호스트를 추가한 후 ONTAP 도구 메인 메뉴로 가서 개요 패널에서 *검색*을 선택합니다.  검색 프로세스가 완료될 때까지 기다리세요.  또는 예약된 호스트 검색이 완료될 때까지 기다릴 수 있습니다.
+
+
+.결과
+이제 새로운 호스트는 ONTAP tools for VMware vSphere 에서 검색되고 관리됩니다.  새로운 호스트에서 데이터 저장소를 관리할 수 있습니다.
+
+.관련 주제
+* link:../manage/mount-a-vvols-datastore.html["vVols 데이터 저장소 마운트"]새로운 호스트에서.
+* link:../manage/mount-datastores-on-host.html["NFS 및 VMFS 데이터 저장소 마운트"]새로운 호스트에서.
+

@@ -13,6 +13,9 @@ summary: 데이터스토어를 마운트하면 추가 호스트에 대한 스토
 [role="lead"]
 데이터스토어를 마운트하면 추가 호스트에 대한 스토리지 액세스가 제공됩니다.  VMware 환경에 호스트를 추가한 후 추가 호스트에 데이터스토어를 마운트할 수 있습니다.
 
+
+NOTE: 다음을 사용하여 새 ESXi 호스트를 추가하는 경우 https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/9-0/use-quickstart-to-add---host-to-a-cluster.html["vSphere 클러스터 워크플로에 ESX 호스트 추가"] ONTAP 도구에 표시되기 전에 예약된 호스트 검색이 완료될 때까지 기다리세요.  또는 NetApp ONTAP 도구 개요 화면에서 수동으로 검색을 실행할 수 있습니다.
+
 .이 작업에 관하여
 * 일부 마우스 오른쪽 버튼 클릭 작업은 vSphere 클라이언트 버전과 선택한 데이터 저장소 유형에 따라 비활성화되거나 사용할 수 없습니다.
 +
@@ -32,3 +35,6 @@ summary: 데이터스토어를 마운트하면 추가 호스트에 대한 스토
 
 .다음은 무엇인가요?
 최근 작업 패널에서 진행 상황을 추적할 수 있습니다.
+
+.관련 주제
+link:../manage/add-vsphere-host.html["새로운 VMware vSphere 호스트 추가"]
