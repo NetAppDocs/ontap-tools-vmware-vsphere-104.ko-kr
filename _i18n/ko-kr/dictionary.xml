@@ -1775,14 +1775,8 @@
   <block id="9f147a250dd9a5cd9d9745eb3f5f7668" category="paragraph">네트워크 액세스 제어나 보안 조치에 프록시 서버가 사용되는 시나리오에서 AutoSupport 기능이 제대로 작동하도록 하려면 AutoSupport 프록시 URL을 업데이트하세요.  이를 통해 AutoSupport 데이터를 적절한 프록시를 통해 라우팅하여 안전한 전송과 규정 준수가 가능해집니다.</block>
   <block id="d49d8a5effc0a522fa72d0ff457066df" category="list-text">유효한 *프록시 URL*을 입력하고 변경 사항을 저장합니다.</block>
   <block id="eb587ff6958c1e65b721306af8fa8e3b" category="paragraph">AutoSupport 비활성화하면 프록시 URL도 비활성화됩니다.</block>
-  <block id="a6f65a806180d1ff3c8d5e553e634e9d" category="summary">유지 관리 콘솔을 사용하여 vCenter Server 및 ONTAP 자격 증명을 업데이트할 수 있습니다.</block>
-  <block id="f72e000ebb4c7bedf651a46e595f1371" category="doc">vCenter Server 및 ONTAP 자격 증명 업데이트</block>
-  <block id="7ac19aa441feceb73519a5108d4cc366" category="paragraph">유지 관리 콘솔을 사용하여 vCenter Server 인스턴스와 ONTAP 자격 증명을 업데이트할 수 있습니다.</block>
   <block id="21a56b485fb6cd9f7c9cc8f514440950" category="paragraph">유지 관리 사용자 로그인 자격 증명이 필요합니다.</block>
-  <block id="1f8bb3d639d4544a4979b060d7cccc88" category="paragraph">배포 후 vCenter Server, ONTAP 또는 Data LIF에 대한 자격 증명을 변경한 경우 이 절차를 사용하여 자격 증명을 업데이트해야 합니다.</block>
   <block id="cea5a13834803a12adaeb249165351df" category="list-text">입력하다<block ref="c81e728d9d4c2f636f067f89cc14862c" prefix=" " category="inline-code"></block> 시스템 구성 메뉴를 선택하세요.</block>
-  <block id="86ce6e9c3af571980099ca308cd245e3" category="list-text">입력하다<block ref="45c48cce2e2d7fbdea1afc51c7c6ad26" prefix=" " category="inline-code"></block> ONTAP 자격 증명을 변경하려면.</block>
-  <block id="207c00a73dde0270cc0fbc7ce9c5f2fd" category="list-text">입력하다<block ref="d3d9446802a44259755d38e6d163e820" prefix=" " category="inline-code"></block> vCenter 자격 증명을 변경하려면.</block>
   <block id="d3cd4bffc1abc46e60337f8438f457b9" category="summary">저장소 보기에는 가상 머신에서 생성된 vVols 목록이 표시됩니다.</block>
   <block id="f6607063532d19e10b746de0f6108f15" category="doc">가상 머신 스토리지 보기</block>
   <block id="9d850336a156831a9095fd981a1a0c23" category="admonition">이 보기는 VMware vSphere 관리 vVols 데이터 저장소 관련 디스크에 대한 ONTAP tools for VMware vSphere 하나 이상 마운트된 VM에 적용할 수 있습니다.</block>
@@ -2284,7 +2278,6 @@
   <block id="cd457aeee08a9f6476660a1f15284160" category="paragraph">하드 디스크를 추가한 후 해당 구성에 맞게 VM 리소스를 업데이트하고 기본 VM을 다시 시작합니다.</block>
   <block id="82c4bde04ac809c6d15f232949e072ce" category="paragraph">새로운 HDD가 생성됩니다.  동적 스토리지 프로비저너는 이 HDD를 사용하여 볼륨을 생성하거나 복제합니다.</block>
   <block id="b06f0e274f6c746f0d30521b5c7f392e" category="list-text">ONTAP tools for VMware vSphere 콘텐츠 라이브러리에 업로드합니다.</block>
-  <block id="dd5382558ec4a47dfbc203fb25698772" category="list-text">기본 VM 페이지에서 *작업* &gt; *설정 편집*을 선택합니다.</block>
   <block id="ef9e53e40d78d57abe78283a3603eb4e" category="list-text">*CD/DVD 드라이브* 필드 아래의 편집 설정 창에서 콘텐츠 라이브러리 ISO 파일을 선택합니다.</block>
   <block id="54a029420d74c0dff69239155cf510b5" category="inline-image-macro">설정 편집</block>
   <block id="2c2d3019834934bb25449edddc396321" category="list-text">ISO 파일을 선택하고 *확인*을 선택합니다.  *CD/DVD 드라이브* 필드에서 연결됨 확인란을 선택합니다.<block ref="af57a506b85774ef3a9f849e2b26e258" category="inline-image-macro-rx" type="image"></block></block>
@@ -2433,4 +2426,12 @@
   <block id="83c2a6ded9467f8048f9a53cabd2e783" category="paragraph-title">관련 주제</block>
   <block id="403e2c858b37daa43171ef37b71e6640" category="paragraph"><block ref="403e2c858b37daa43171ef37b71e6640" category="inline-link-macro-rx"></block></block>
   <block id="17e484c8a86cb4a7c9192fe5d0393445" category="list-text">*2*을 입력하여 시스템 구성 메뉴를 선택합니다.</block>
+  <block id="f59d6f6c2fbe5659bab55bb335b17871" category="summary">유지 관리 콘솔을 사용하여 vCenter Server 자격 증명을 업데이트할 수 있습니다.</block>
+  <block id="d546c3915b2e0bc231d2bd0456f2d736" category="doc">vCenter Server 자격 증명 업데이트</block>
+  <block id="6e73e8087488ddc10c72aeec0f27cc93" category="paragraph">유지 관리 콘솔을 사용하여 vCenter Server 인스턴스 자격 증명을 업데이트할 수 있습니다.</block>
+  <block id="1f2db2b2d242479839579d1cc7f9d26e" category="paragraph">배포 후 vCenter Server의 자격 증명을 변경한 경우 이 절차를 사용하여 자격 증명을 업데이트해야 합니다.</block>
+  <block id="a38dbe6982c223d82e53b7d0feab69ce" category="list-text">입력하다<block ref="c9f0f895fb98ab9159f51fd0297e236d" prefix=" " category="inline-code"></block> vCenter 자격 증명을 변경하려면.</block>
+  <block id="a928a1b805644ea87a643f7f8d60a477" category="list-text">기본 VM 페이지에서 *작업* &gt; *설정 편집*을 선택합니다. 기본 VM 이름을 식별하려면:</block>
+  <block id="75a86edd37c9b2122be450b28fa09149" category="list-text">모든 노드에서 진단 셸을 활성화합니다.</block>
+  <block id="e016d50ae26af4214e6a864c1c2c8db5" category="list-text">다음 명령을 실행하세요.<block ref="1ebe86b64a17c55ae52f4488cffae75f" prefix=" " category="inline-code"></block></block>
 </blocks>

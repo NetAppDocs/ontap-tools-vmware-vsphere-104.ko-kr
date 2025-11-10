@@ -103,7 +103,13 @@ ONTAP tools for VMware vSphere 에서 10.1로 업그레이드하는 경우 업�
 
 .단계
 . ONTAP tools for VMware vSphere 콘텐츠 라이브러리에 업로드합니다.
-. 기본 VM 페이지에서 *작업* > *설정 편집*을 선택합니다.
+. 기본 VM 페이지에서 *작업* > *설정 편집*을 선택합니다. 기본 VM 이름을 식별하려면:
++
+.. 모든 노드에서 진단 셸을 활성화합니다.
+.. 다음 명령을 실행하세요.
+`grep sourceHost /opt/netapp/meta/ansible_vars.yaml`
+
+
 . *CD/DVD 드라이브* 필드 아래의 편집 설정 창에서 콘텐츠 라이브러리 ISO 파일을 선택합니다.
 . ISO 파일을 선택하고 *확인*을 선택합니다.  *CD/DVD 드라이브* 필드에서 연결됨 확인란을 선택합니다.image:../media/primaryvm-edit-settings.png["설정 편집"]
 . vCenter Server에서 ONTAP 도구로 콘솔을 엽니다.
