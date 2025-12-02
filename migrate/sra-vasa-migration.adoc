@@ -10,6 +10,9 @@ summary: 스토리지 데이터를 마이그레이션할 때 스토리지 백엔
 :imagesdir: ../media/
 
 
+[role="lead"]
+이 섹션의 단계에 따라 ONTAP tools for VMware vSphere 에서 ONTAP tools for VMware vSphere 로 VASA 공급자를 마이그레이션하고 VMware Live Site Recovery 어플라이언스에서 SRA(스토리지 복제 어댑터)를 업데이트합니다.
+
 
 
 == VASA 공급자를 마이그레이션하는 단계
@@ -22,15 +25,33 @@ iptables -I INPUT 1 -p tcp --dport 1527 -j ACCEPT
 ----
 . ONTAP tools for VMware vSphere 배포합니다.
 . ONTAP tools for VMware vSphere 로 마이그레이션하려는 vCenter Server 인스턴스를 추가합니다. . link:../configure/add-vcenter.html["vCenter Server 인스턴스 추가"] 자세한 내용은.
-. ONTAP 도구 플러그인을 위한 vCenter 서버 API에서 로컬로 스토리지 백엔드를 온보딩합니다.
-. Swagger 또는 Postman에서 다음 API를 실행하여 마이그레이션합니다.
+. ONTAP 도구 플러그인을 위한 vCenter 서버 API에서 로컬로 스토리지 백엔드를 온보딩합니다. 다음을 참조하세요.link:../configure/add-storage-backend.html["vSphere 클라이언트 인터페이스를 사용하여 스토리지 백엔드 추가"] 자세한 내용은.
+. REST API 요청을 인증하기 위한 액세스 토큰을 얻습니다. 다음 예를 사용하여 변수를 사용자 환경에 맞는 값으로 바꿔보세요.
 +
-curl -X POST  `\https://xx.xx.xx.xx:8443/virtualization/api/v1/vcenters/{vcguid}/migration-jobs``
++
+
+
+
+[listing]
+----
+curl --request POST \
+--location "https://$FQDN_IP_PORT/virtualization/api/v1/auth/login” \
+--header "Content-Type: application/json" \
+--header "Accept: */*" \
+-d "{"username": "$MYUSER", "password": "$MYPASSWORD"}"
+----
+응답에서 반환된 액세스 토큰을 복사하여 저장합니다. . Swagger 또는 Postman에서 다음 API를 실행하여 마이그레이션합니다.
 
 +
-다음 URL을 통해 Swagger에 액세스할 수 있습니다.  `\https://$FQDN_IP_PORT/', for example: `\https://10.67.25.33:8443` .
+
+[listing]
+----
+curl -X POST `\https://xx.xx.xx.xx:8443/virtualization/api/v1/vcenters/{vcguid}/migration-jobs`
+----
++ 다음 URL을 통해 Swagger에 접속할 수 있습니다: `\https://$FQDN_IP_PORT/` , 예를 들어: `\https://10.67.25.33:8443/` .
 
 +
+
 []
 ====
 *HTTP 메서드 및 엔드포인트*
@@ -51,38 +72,72 @@ curl -X POST  `\https://xx.xx.xx.xx:8443/virtualization/api/v1/vcenters/{vcguid}
 
 *컬 예시*
 
-curl -X POST'https://<OTV-NG-IP>:8443/virtualization/api/v1/vcenters/<vcguid>/migration-jobs'[] \ --header 'x-auth: <인증 토큰>' \ --header '콘텐츠 유형: application/json' \ --data '{ "otv_ip": "xx.xx.xx.xx", "vasa_provider_credentials": { "username": "xxxxx", "password": "******" }, "database_password": "******" }'
-
+[listing]
+----
+curl -X POST 'https://<OTV-NG-IP>:8443/virtualization/api/v1/vcenters/<vcguid>/migration-jobs' \
+--header 'x-auth: <auth_token>' \
+--header 'Content-Type: application/json' \
+--data '{
+  "otv_ip": "xx.xx.xx.xx",
+  "vasa_provider_credentials": {
+    "username": "xxxxx",
+    "password": "******"
+  },
+  "database_password": "******"
+}'
+----
 다른 릴리스 마이그레이션에 대한 요청 본문:
 
-{ "otv_ip": "xx.xx.xx.xx", "vasa_provider_credentials": { "사용자 이름": "xxxxx", "비밀번호": "*******" } }
-
+[listing]
+----
+{
+  "otv_ip": "xx.xx.xx.xx",
+  "vasa_provider_credentials": {
+    "username": "xxxxx",
+    "password": "*******"
+  }
+}
+----
 *JSON 출력 예시*
 
-작업 객체가 반환됩니다.  다음 단계에서 사용하려면 작업 식별자를 저장해야 합니다.
+시스템은 작업 객체를 반환합니다. 다음 단계에서 사용할 작업 식별자를 저장하세요.
 
-{ "id": 123, "migration_id": "d50073ce-35b4-4c51-9d2e-4ce66f802c35", "status": "실행 중" }
-
+[listing]
+----
+{
+  "id": 123,
+  "migration_id": "d50073ce-35b4-4c51-9d2e-4ce66f802c35",
+  "status": "running"
+}
+----
 ====
 . Swagger에서 다음 URI를 사용하여 상태를 확인하세요.
 +
 [listing]
 ----
-curl `\https://xx.xx.xx.xxx:8443/virtualization/api/jobmanager/v2/jobs/<JobID>?includeSubJobsAndTasks=true`
+curl `\https://xx.xx.xx.xxx:8443/virtualization/api/jobmanager/v2/jobs/<migration_id>?includeSubJobsAndTasks=true`
 ----
 +
-작업을 완료한 후 마이그레이션 보고서를 검토하세요.  이 보고서는 작업 데이터에 포함되어 있으며 작업 응답에서 접근할 수 있습니다.
+작업이 완료되면 작업 응답에서 마이그레이션 보고서를 검토합니다.
 
-. vCenter Server에 ONTAP tools for VMware vSphere 추가link:../configure/registration-process.html["VASA 공급자 등록"] ONTAP tools for VMware vSphere 사용.
+. vCenter Server에 ONTAP tools for VMware vSphere 추가합니다.
+. ONTAP tools for VMware vSphere 사용하여 VASA 공급자를 등록합니다. 지침은 다음을 참조하세요.link:../configure/registration-process.html["VASA 공급자 등록"] .
+. 등록 후 vSphere Client의 *스토리지 공급자*에서 VASA 공급자의 이름과 상태를 확인하세요. VASA 공급자가 온라인에 나타나 등록이 성공적으로 완료되었음을 확인해야 합니다.
 . link:../manage/enable-services.html["VASA 공급자 활성화"]ONTAP tools for VMware vSphere 서비스.
-. 유지 관리 콘솔에서 ONTAP tools for VMware vSphere 중지합니다.
+. 다음 단계를 사용하여 ONTAP tools for VMware vSphere 중지합니다.
 +
-VASA 공급자를 삭제하지 마세요.
-
+.. ONTAP 도구 9.x에서 웹 콘솔을 엽니다.
+.. 유지 관리 콘솔에 액세스합니다.
+.. 입력하다 `1` *응용 프로그램 구성* 메뉴를 선택하세요.
+.. 입력하다 `5` VASA 공급자와 SRA 서비스를 중지합니다.
+.. vSphere Client에서 *인벤토리* > *스토리지 공급자*로 이동합니다.
+.. 스토리지 백엔드에서 ONTAP 도구 9.x VASA 공급자를 선택하고 *제거*를 클릭합니다.
 +
 이전 VASA Provider가 중지되면 vCenter Server는 ONTAP tools for VMware vSphere 로 장애 조치됩니다. 모든 데이터스토어와 VM에 액세스할 수 있게 되고 ONTAP tools for VMware vSphere 에서 서비스를 제공합니다.
 
-. ONTAP tools for VMware vSphere 에서 마이그레이션된 NFS 및 VMFS 데이터 저장소는 데이터 저장소 검색 작업이 트리거된 후에만 ONTAP tools for VMware vSphere 에 표시되며, 완료하는 데 최대 30분이 걸릴 수 있습니다.  VMware vSphere 플러그인 사용자 인터페이스 페이지의 ONTAP 도구 개요 페이지에 데이터 저장소가 표시되는지 확인하세요.
+
+
+. 마이그레이션된 NFS 및 VMFS 데이터 저장소는 데이터 저장소 검색 작업 후 ONTAP tools for VMware vSphere 에 나타나며, 이 작업에는 최대 30분이 걸릴 수 있습니다. 개요 페이지에서 가시성을 확인하세요.
 . Swagger 또는 Postman에서 다음 API를 사용하여 패치 마이그레이션을 수행합니다.
 +
 []
@@ -103,49 +158,64 @@ VASA 공급자를 삭제하지 마세요.
 
 비동기
 
+Swagger에서 다음 URI를 사용하세요.
+
+[listing]
+----
+curl  -X PATCH  `\https://xx.xx.xx.xx:8443/virtualization/api/v1/vcenters/<vcenter_id>/migration-jobs/<migration_id>`
+----
 *컬 예시*
 
-curl -X 패치  `\https://xx.xx.xx.xx:8443/virtualization/api/v1/vcenters/56d373bd-4163-44f9-a872-9adabb008ca9/migration-jobs/84dr73bd-9173-65r7-w345-8ufdbb887d43`
-
+[listing]
+----
+curl  -X PATCH  `\https://xx.xx.xx.xx:8443/virtualization/api/v1/vcenters/56d373bd-4163-44f9-a872-9adabb008ca9/migration-jobs/d50073ce-35b4-4c51-9d2e-4ce66f802c35`
+----
 *JSON 출력 예시*
 
 작업 객체가 반환됩니다.  다음 단계에서 사용하려면 작업 식별자를 저장해야 합니다.
 
-{ "id": 123, "migration_id": "d50073ce-35b4-4c51-9d2e-4ce66f802c35", "status": "실행 중" }
-
+[listing]
+----
+{
+  "id": 123,
+  "migration_id": "d50073ce-35b4-4c51-9d2e-4ce66f802c35",
+  "status": "running"
+}
+----
+====
++
 패치 작업을 위한 요청 본문이 비어 있습니다.
+
+
 
 
 NOTE: UUID는 마이그레이션 후 API에 대한 응답으로 반환된 마이그레이션 UUID입니다.
 
 패치 마이그레이션 API를 실행한 후 모든 VM이 스토리지 정책을 준수합니다.
 
-====
-
-
 .다음은 무엇입니까?
 마이그레이션을 완료하고 ONTAP 도구 10.4를 vCenter Server에 등록한 후 다음 단계를 따르세요.
 
-* *검색*이 완료될 때까지 기다리면 모든 호스트에서 인증서가 자동으로 새로 고쳐집니다.
-* 데이터스토어 및 가상 머신 작업을 시작하기 전에 충분한 시간을 두십시오. 필요한 대기 시간은 구성 내 호스트, 데이터스토어 및 가상 머신 수에 따라 다릅니다. 대기하지 않으면 간헐적인 운영 장애가 발생할 수 있습니다.
+* *검색*이 완료될 때까지 기다리면 시스템이 모든 호스트의 인증서를 자동으로 새로 고칩니다.
+* 데이터 저장소 및 가상 머신 작업을 시작하기 전에 기다리세요. 대기 시간은 호스트, 데이터스토어, 가상 머신의 수에 따라 달라집니다. 기다리지 않으면 가끔 실패를 겪을 수도 있습니다.
 
 
 업그레이드 후 가상 머신의 규정 준수 상태가 오래된 경우 다음 단계에 따라 스토리지 정책을 다시 적용하세요.
 
 . 데이터 저장소로 이동하여 *요약* > *VM 스토리지 정책*을 선택합니다.
 +
-*VM 스토리지 정책 준수* 아래의 준수 상태가 *오래됨*으로 표시됩니다.
+시스템은 *VM 스토리지 정책 준수*에서 준수 상태를 *오래됨*으로 표시합니다.
 
-. 저장소 VM 정책과 해당 VM을 선택하세요.
-. *적용*을 선택하세요
+. 저장소 VM 정책과 해당 VM을 선택합니다.
+. *적용*을 선택하세요.
 +
-*VM 스토리지 정책 준수*의 준수 상태가 이제 준수로 표시됩니다.
+*VM 스토리지 정책 준수*의 준수 상태가 준수로 표시됩니다. .관련 정보
+
++
+** link:../concepts/rbac-learn-about.html["ONTAP tools for VMware vSphere 에 대해 알아보세요"]
+** link:../upgrade/upgrade-ontap-tools.html["ONTAP tools for VMware vSphere 에서 10.4로 업그레이드"]
 
 
-
-.관련 정보
-* link:../concepts/rbac-learn-about.html["ONTAP tools for VMware vSphere 에 대해 알아보세요"]
-* link:../upgrade/upgrade-ontap-tools.html["ONTAP tools for VMware vSphere 에서 10.4로 업그레이드"]
 
 
 
